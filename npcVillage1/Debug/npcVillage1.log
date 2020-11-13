@@ -1,0 +1,5 @@
+﻿  Villager.cpp
+c:\users\austi\documents\4th year\cmp400\project\npcvillage1\npcvillage1\villager.h(7): error C3646: 'Forename': unknown override specifier
+c:\users\austi\documents\4th year\cmp400\project\npcvillage1\npcvillage1\villager.h(7): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\austi\documents\4th year\cmp400\project\npcvillage1\npcvillage1\villager.h(8): error C3646: 'Surname': unknown override specifier
+c:\users\austi\documents\4th year\cmp400\project\npcvillage1\npcvillage1\villager.h(8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
