@@ -6,6 +6,8 @@ class Villager
 public:
 	void OutputData(Villager subject);
 
+	int idNumber;
+
 	std::string Forename;
 	std::string Surname;
 	
@@ -19,47 +21,42 @@ public:
 
 	Villager *Partner;				//All of these need to be pointers to instances of the class
 
-	Villager *Kid;      //REMEMBER TO SET THE ARRAY UP FOR MAX KIDS LATER
-
 	int KidCount;
 
-	Villager *Friends;   //SAME BUT FOR FRIENDS, NOT AS IMPORTANT THO
+	Villager *Kid[4];      //REMEMBER TO SET THE ARRAY UP FOR MAX KIDS LATER
 
 	int FriendCount;
+
+	Villager *Friends[4];   //SAME BUT FOR FRIENDS, NOT AS IMPORTANT THO
+
 
 	Villager *ParentM;
 
 	Villager *ParentF;
 
-	class Job  //Hoping this works, should help later expansion
+	enum Role
 	{
-	public:
-		enum Role
-		{
-			DEAD,
-			FARMER,
-			SMITH,
-			HUNTER,
-			HOUSEWIFE,
-			WEAVER,
-			SOLDIER
-		};
+		DEAD,
+		FARMER,
+		SMITH,
+		HUNTER,
+		HOUSEWIFE,
+		WEAVER,
+		SOLDIER
 	};
 
-	Job Profession;
+	Role Job;
+	
 
-	//Lots of repeating code, may as well class it to keep track of wound condition
-	class Wound
+	//Lots of repeating code, bit messy
+
+	enum Wound
 	{
-	public:
-		enum Condition
-		{
-			FINE,
-			SCARRED,
-			BURNED,
-			CRIPPLED,		//Head crippled = DEAD
-			MISSING			//Head or Torso missing = DEAD
-		};
+		FINE,
+		SCARRED,
+		BURNED,
+		CRIPPLED,		//Head crippled = DEAD
+		MISSING			//Head or Torso missing = DEAD
 	};
 
 	//INJURIES 
