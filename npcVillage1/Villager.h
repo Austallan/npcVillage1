@@ -5,12 +5,16 @@ class Villager
 {
 public:
 	void OutputData(Villager subject);
+	std::string ReturnParentM(Villager* PartnerPtr);
+	std::string ReturnParentF(Villager* PartnerPtr);
 
 	int idNumber;
 
 	std::string Forename;
 	std::string Surname;
 	
+	int BirthYear;
+
 	int Age;
 
 	bool Male;  //Trust me, it's easier to remember this way
@@ -42,7 +46,8 @@ public:
 		HUNTER,
 		HOUSEWIFE,
 		WEAVER,
-		SOLDIER
+		SOLDIER,
+		CHILD
 	};
 
 	Role Job;

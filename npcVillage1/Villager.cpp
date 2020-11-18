@@ -4,6 +4,27 @@
 
 //FUNCTIONS DOWN HERE												FUNCTIONS DOWN HERE
 //VVVVVVVVVVVVVVVVVVV												VVVVVVVVVVVVVVVVVVV
+std::string Villager::ReturnParentM(Villager* PartnerPtr)
+{
+	std::string tempHolder;
+	std::string tempForename = PartnerPtr->Forename;
+	std::string tempSurname = PartnerPtr->Surname;
+
+	tempHolder = tempForename + " " + tempSurname;
+
+	return tempHolder;
+}
+
+std::string Villager::ReturnParentF(Villager* PartnerPtr)
+{
+	std::string tempHolder;
+	std::string tempForename = PartnerPtr->Forename;
+	std::string tempSurname = PartnerPtr->Surname;
+
+	tempHolder = tempForename + " " + tempSurname;
+
+	return tempHolder;
+}
 
 void Villager::OutputData(Villager subject)
 {
@@ -37,13 +58,13 @@ void Villager::OutputData(Villager subject)
 
 	//Parents
 	std::cout << "\n Father: ";
-		if (subject.ParentM == NULL)
+		if (subject.ParentM != NULL)
 		{
-			std::cout << "Lost to time		";
+			std::cout << subject.ReturnParentM(subject.ParentM);
 		}
 		else 
 		{
-			std::cout << subject.ParentM->Forename << " " << subject.ParentM->Surname << "		";
+			std::cout << "Lost to time		";
 		}
 
 		std::cout << "Mother: ";
@@ -53,7 +74,8 @@ void Villager::OutputData(Villager subject)
 		}
 		else
 		{
-			std::cout << subject.ParentF->Forename << " " << subject.ParentF->Surname;
+			//std::cout << subject.ParentF->Forename << " " << subject.ParentF->Surname;
+			std::cout << subject.ReturnParentF(subject.ParentF);
 		}
 
 	//Current location
@@ -161,6 +183,10 @@ void Villager::OutputData(Villager subject)
 
 			case SOLDIER:
 				std::cout << "Soldier";
+				break;
+
+			case CHILD:
+				std::cout << "Child";
 				break;
 			}
 
