@@ -5,53 +5,44 @@ class Villager
 {
 public:
 	void OutputData(Villager subject);
-	std::string ReturnParentM(Villager* PartnerPtr);
-	std::string ReturnParentF(Villager* PartnerPtr);
+	std::string ReturnParent(Villager* PartnerPtr);
+	void SetParentM(Villager* newParentM);
+	void SetParentF(Villager* newParentF);
 
 	int idNumber;
-
-	std::string Forename;
-	std::string Surname;
 	
 	int BirthYear;
 
 	int Age;
 
-	bool Male;  //Trust me, it's easier to remember this way
-
 	bool Alive;
 
-	std::string Location;
-
-	Villager *Partner;				//All of these need to be pointers to instances of the class
-
-	int KidCount;
-
-	Villager *Kid[4];      //REMEMBER TO SET THE ARRAY UP FOR MAX KIDS LATER
+	std::string Forename;
+	std::string Surname;
 
 	int FriendCount;
 
-	Villager *Friends[4];   //SAME BUT FOR FRIENDS, NOT AS IMPORTANT THO
+	bool Male;  //Trust me, it's easier to remember this way
 
+	Villager *Kid[4];      //REMEMBER TO SET THE ARRAY UP FOR MAX KIDS LATER
 
-	Villager *ParentM;
+	int KidCount;
+
+	std::string Location;
 
 	Villager *ParentF;
 
-	enum Role
-	{
-		DEAD,
-		FARMER,
-		SMITH,
-		HUNTER,
-		HOUSEWIFE,
-		WEAVER,
-		SOLDIER,
-		CHILD
-	};
+	Villager *ParentM;
 
-	Role Job;
+	Villager *Friends[4];   //SAME BUT FOR FRIENDS, NOT AS IMPORTANT THO
+
+	Villager *Partner;				//All of these need to be pointers to instances of the class
 	
+	//Myers-Briggs stuff (first letter if true)
+	bool mbEI;
+	bool mbSN;
+	bool mbTF;
+	bool mbJP;
 
 	//Lots of repeating code, bit messy
 
@@ -72,9 +63,17 @@ public:
 	Wound LegR;
 	Wound LegL;
 
-	//Myers-Briggs stuff (first letter if true)
-	bool mbEI;
-	bool mbSN;
-	bool mbTF;
-	bool mbJP;
+	enum Role
+	{
+		DEAD,
+		FARMER,
+		SMITH,
+		HUNTER,
+		HOUSEWIFE,
+		WEAVER,
+		SOLDIER,
+		CHILD
+	};
+
+	Role Job;
 };

@@ -62,8 +62,8 @@ void feasabilityDemoPeople()
     }
     villager[1].KidCount = 0;
     villager[1].Location = "Deesden";
-    villager[1].ParentF = &villager[0];
-    villager[1].ParentM = &villager[0];
+    villager[1].SetParentF(&villager[0]);
+    villager[1].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[1].Friends[i] = NULL;
@@ -99,8 +99,8 @@ void feasabilityDemoPeople()
     }
     villager[2].KidCount = 0;
     villager[2].Location = "Deesden";
-    villager[2].ParentF = &villager[0];
-    villager[2].ParentM = &villager[0];
+    villager[2].SetParentF(&villager[0]);
+    villager[2].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[2].Friends[i] = NULL;
@@ -136,8 +136,8 @@ void feasabilityDemoPeople()
     }
     villager[3].KidCount = 0;
     villager[3].Location = "Deesden";
-    villager[3].ParentF = &villager[0];
-    villager[3].ParentM = &villager[0];
+    villager[3].SetParentF(&villager[0]);
+    villager[3].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[3].Friends[i] = NULL;
@@ -173,8 +173,8 @@ void feasabilityDemoPeople()
     }
     villager[4].KidCount = 0;
     villager[4].Location = "Deesden";
-    villager[4].ParentF = &villager[0];
-    villager[4].ParentM = &villager[0];
+    villager[4].SetParentF(&villager[0]);
+    villager[4].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[4].Friends[i] = NULL;
@@ -210,8 +210,8 @@ void feasabilityDemoPeople()
     }
     villager[5].KidCount = 0;
     villager[5].Location = "Deesden";
-    villager[5].ParentF = &villager[0];
-    villager[5].ParentM = &villager[0];
+    villager[5].SetParentF(&villager[0]);
+    villager[5].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[5].Friends[i] = NULL;
@@ -247,8 +247,8 @@ void feasabilityDemoPeople()
     }
     villager[6].KidCount = 0;
     villager[6].Location = "Deesden";
-    villager[6].ParentF = &villager[0];
-    villager[6].ParentM = &villager[0];
+    villager[6].SetParentF(&villager[0]);
+    villager[6].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[6].Friends[i] = NULL;
@@ -284,8 +284,8 @@ void feasabilityDemoPeople()
     }
     villager[7].KidCount = 0;
     villager[7].Location = "Deesden";
-    villager[7].ParentF = &villager[0];
-    villager[7].ParentM = &villager[0];
+    villager[7].SetParentF(&villager[0]);
+    villager[7].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[7].Friends[i] = NULL;
@@ -321,8 +321,8 @@ void feasabilityDemoPeople()
     }
     villager[8].KidCount = 0;
     villager[8].Location = "Deesden";
-    villager[8].ParentF = &villager[0];
-    villager[8].ParentM = &villager[0];
+    villager[8].SetParentF(&villager[0]);
+    villager[8].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[8].Friends[i] = NULL;
@@ -358,8 +358,8 @@ void feasabilityDemoPeople()
     }
     villager[9].KidCount = 0;
     villager[9].Location = "Deesden";
-    villager[9].ParentF = &villager[0];
-    villager[9].ParentM = &villager[0];
+    villager[9].SetParentF(&villager[0]);
+    villager[9].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[9].Friends[i] = NULL;
@@ -395,8 +395,8 @@ void feasabilityDemoPeople()
     }
     villager[10].KidCount = 0;
     villager[10].Location = "Deesden";
-    villager[10].ParentF = &villager[0];
-    villager[10].ParentM = &villager[0];
+    villager[10].SetParentF(&villager[0]);
+    villager[10].SetParentM(&villager[0]);
     for (int i = 0; i <= 4; i++)
     {
         villager[10].Friends[i] = NULL;

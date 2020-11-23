@@ -4,7 +4,7 @@
 
 //FUNCTIONS DOWN HERE												FUNCTIONS DOWN HERE
 //VVVVVVVVVVVVVVVVVVV												VVVVVVVVVVVVVVVVVVV
-std::string Villager::ReturnParentM(Villager* PartnerPtr)
+std::string Villager::ReturnParent(Villager* PartnerPtr)
 {
 	std::string tempHolder;
 	std::string tempForename = PartnerPtr->Forename;
@@ -15,15 +15,15 @@ std::string Villager::ReturnParentM(Villager* PartnerPtr)
 	return tempHolder;
 }
 
-std::string Villager::ReturnParentF(Villager* PartnerPtr)
+//SetParentM and SetParentF are redundant atm, but are being kept to make it easier to encapsulate everything later if there is time
+void Villager::SetParentM(Villager* newParentM)
 {
-	std::string tempHolder;
-	std::string tempForename = PartnerPtr->Forename;
-	std::string tempSurname = PartnerPtr->Surname;
+	ParentM = newParentM;
+}
 
-	tempHolder = tempForename + " " + tempSurname;
-
-	return tempHolder;
+void Villager::SetParentF(Villager* newParentF)
+{
+	ParentF = newParentF;
 }
 
 void Villager::OutputData(Villager subject)
@@ -58,9 +58,9 @@ void Villager::OutputData(Villager subject)
 
 	//Parents
 	std::cout << "\n Father: ";
-		if (subject.ParentM != NULL)
+		if (subject.ParentF != NULL)
 		{
-			std::cout << subject.ReturnParentM(subject.ParentM);
+			std::cout << subject.ReturnParent(subject.ParentF) << "   ";
 		}
 		else 
 		{
@@ -68,14 +68,14 @@ void Villager::OutputData(Villager subject)
 		}
 
 		std::cout << "Mother: ";
-		if (subject.ParentM == NULL)
+		if (subject.ParentM != NULL)
 		{
-			std::cout << "Lost to time";
+			//std::cout << subject.ParentF->Forename << " " << subject.ParentF->Surname;
+			std::cout << subject.ReturnParent(subject.ParentM);
 		}
 		else
 		{
-			//std::cout << subject.ParentF->Forename << " " << subject.ParentF->Surname;
-			std::cout << subject.ReturnParentF(subject.ParentF);
+			std::cout << "Lost to time";
 		}
 
 	//Current location
