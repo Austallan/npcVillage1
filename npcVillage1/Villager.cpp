@@ -35,18 +35,19 @@ void Villager::NaturalCausesDeath()
 	{
 		Alive = false;
 		Job = DEAD;
+		std::cout << Forename << " " << Surname << " has died of natural causes at the age of " << Age << "\n";
 	}
 }
 
 //run each potential yearly activity for a villager, as well as incrementing yearly values
-void Villager::SimulateYear()
+void Villager::SimulateYear(Villager(&villagerArray)[300], int population)
 {
 	//The dead can be skipped
 	if (Alive)
 	{
 		Age++;
 
-		NaturalCausesDeath();
+		NaturalCausesDeath(); //do this last to account for and deathRisk gained in the year
 	}
 }
 
