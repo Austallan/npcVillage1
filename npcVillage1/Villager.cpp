@@ -2,6 +2,7 @@
 #include <iostream>
 
 
+
 //FUNCTIONS DOWN HERE												FUNCTIONS DOWN HERE
 //VVVVVVVVVVVVVVVVVVV												VVVVVVVVVVVVVVVVVVV
 std::string Villager::ReturnParent(Villager* PartnerPtr)
@@ -26,17 +27,42 @@ void Villager::SetParentF(Villager* newParentF)
 	ParentF = newParentF;
 }
 
-void Villager::OutputData(Villager subject)
+void Villager::NaturalCausesDeath()
+{
+	
+
+	if ((rand() % 100 + 70) < (Age + deathRisk))
+	{
+		Alive = false;
+		Job = DEAD;
+	}
+}
+
+//run each potential yearly activity for a villager, as well as incrementing yearly values
+void Villager::SimulateYear()
+{
+	//The dead can be skipped
+	if (Alive)
+	{
+		Age++;
+
+		NaturalCausesDeath();
+	}
+}
+
+
+//Print all the data for all villagers to the console
+void Villager::OutputData()
 {
 	//Villager ID number
-	std::cout << "\n Villager ID: " << subject.idNumber;
+	std::cout << "\n Villager ID: " << idNumber;
 
 	//Foraname and Surname
-	std::cout << "\n Full Name: " << subject.Forename << " " << subject.Surname;
+	std::cout << "\n Full Name: " << Forename << " " << Surname;
 	
 	//Age, gender and Alive status
-	std::cout << "\n Age: " << subject.Age << "		Gender: ";
-	if (subject.Male)
+	std::cout << "\n Age: " << Age << "		Gender: ";
+	if (Male)
 	{
 		std::cout << "Male";
 	}
@@ -47,7 +73,7 @@ void Villager::OutputData(Villager subject)
 
 	std::cout << "		Status: ";
 	
-	if (subject.Alive)
+	if (Alive)
 	{
 		std::cout << "Alive";
 	}
@@ -58,9 +84,9 @@ void Villager::OutputData(Villager subject)
 
 	//Parents
 	std::cout << "\n Father: ";
-		if (subject.ParentF != NULL)
+		if (ParentF != NULL)
 		{
-			std::cout << subject.ReturnParent(subject.ParentF) << "   ";
+			std::cout << ReturnParent(ParentF) << "   ";
 		}
 		else 
 		{
@@ -68,10 +94,10 @@ void Villager::OutputData(Villager subject)
 		}
 
 		std::cout << "Mother: ";
-		if (subject.ParentM != NULL)
+		if (ParentM != NULL)
 		{
 			//std::cout << subject.ParentF->Forename << " " << subject.ParentF->Surname;
-			std::cout << subject.ReturnParent(subject.ParentM);
+			std::cout << ReturnParent(ParentM);
 		}
 		else
 		{
@@ -79,44 +105,44 @@ void Villager::OutputData(Villager subject)
 		}
 
 	//Current location
-		std::cout << "\n Current Residence: " << subject.Location;
+		std::cout << "\n Current Residence: " << Location;
 
 	//Partner status and/or name
 		std::cout << "\n Current Partner: ";
-		if (subject.Partner == NULL)
+		if (Partner == NULL)
 		{
 			std::cout << "No Partner";
 		}
 		else
 		{
-			std::cout << subject.Partner->Forename << " " << subject.Partner->Surname;
+			std::cout << Partner->Forename << " " << Partner->Surname;
 		}
 
 	//Number of kids, list any kids
-		std::cout << "\n Number of Children: " << subject.KidCount;
-		if (subject.KidCount > 0)
+		std::cout << "\n Number of Children: " << KidCount;
+		if (KidCount > 0)
 		{
 			//loop for number of kids to display their names
-			for (int i = 0; i < subject.KidCount; i++)
+			for (int i = 0; i < KidCount; i++)
 			{
-				std::cout << "\n" << subject.Kid;
+				std::cout << "\n" << Kid;
 			}
 		}
 
 	//Number of friends, list any friends
-		std::cout << "\n Number of Friends: " << subject.FriendCount;
-		if (subject.FriendCount > 0)
+		std::cout << "\n Number of Friends: " << FriendCount;
+		if (FriendCount > 0)
 		{
 			//loop for number of friends to display their names
-			for (int i = 0; i < subject.FriendCount; i++)
+			for (int i = 0; i < FriendCount; i++)
 			{
-				std::cout << "\n" << subject.Friends;
+				std::cout << "\n" << Friends;
 			}
 		}
 
 	//Myers-Briggs type
 		std::cout << "\n Myers-Briggs Type: ";
-			if (subject.mbEI)
+			if (mbEI)
 			{
 				std::cout << "E";
 			}
@@ -125,7 +151,7 @@ void Villager::OutputData(Villager subject)
 				std::cout << "I";
 			}
 
-			if (subject.mbSN)
+			if (mbSN)
 			{
 				std::cout << "S";
 			}
@@ -134,7 +160,7 @@ void Villager::OutputData(Villager subject)
 				std::cout << "N";
 			}
 
-			if (subject.mbTF)
+			if (mbTF)
 			{
 				std::cout << "T";
 			}
@@ -143,7 +169,7 @@ void Villager::OutputData(Villager subject)
 				std::cout << "F";
 			}
 
-			if (subject.mbJP)
+			if (mbJP)
 			{
 				std::cout << "J";
 			}
@@ -155,7 +181,7 @@ void Villager::OutputData(Villager subject)
 	//Profession
 			std::cout << "\n Profession: ";
 
-			switch (subject.Job)
+			switch (Job)
 			{
 			case DEAD:
 				std::cout << "Dead";
@@ -194,7 +220,7 @@ void Villager::OutputData(Villager subject)
 			//Head
 			std::cout << "\n Head Status: ";
 
-			switch (subject.Head)
+			switch (Head)
 			{
 			case FINE:
 				std::cout << "Fine";
@@ -221,7 +247,7 @@ void Villager::OutputData(Villager subject)
 			//Torso
 			std::cout << "\n Torso Status: ";
 
-			switch (subject.Torso)
+			switch (Torso)
 			{
 			case FINE:
 				std::cout << "Fine";
@@ -248,7 +274,7 @@ void Villager::OutputData(Villager subject)
 			//Right Arm
 			std::cout << "\n Right Arm Status: ";
 
-			switch (subject.ArmR)
+			switch (ArmR)
 			{
 			case FINE:
 				std::cout << "Fine";
@@ -275,7 +301,7 @@ void Villager::OutputData(Villager subject)
 			//Left Arm
 			std::cout << "\n Left Arm Status: ";
 
-			switch (subject.ArmL)
+			switch (ArmL)
 			{
 			case FINE:
 				std::cout << "Fine";
@@ -302,7 +328,7 @@ void Villager::OutputData(Villager subject)
 			//Right Leg
 			std::cout << "\n Right Leg Status: ";
 
-			switch (subject.LegR)
+			switch (LegR)
 			{
 			case FINE:
 				std::cout << "Fine";
@@ -329,7 +355,7 @@ void Villager::OutputData(Villager subject)
 			//Left Leg
 			std::cout << "\n Left Leg Status: ";
 
-			switch (subject.LegL)
+			switch (LegL)
 			{
 			case FINE:
 				std::cout << "Fine";

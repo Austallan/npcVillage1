@@ -4,10 +4,12 @@
 class Villager
 {
 public:
-	void OutputData(Villager subject);
+	void OutputData();
 	std::string ReturnParent(Villager* PartnerPtr);
 	void SetParentM(Villager* newParentM);
 	void SetParentF(Villager* newParentF);
+	void SimulateYear();
+	void NaturalCausesDeath();
 
 	int idNumber;
 	
@@ -34,9 +36,9 @@ public:
 
 	Villager *ParentM;
 
-	Villager *Friends[4];   //SAME BUT FOR FRIENDS, NOT AS IMPORTANT THO
+	Villager *Friends[4];   //SAME BUT FOR FRIENDS, NOT AS IMPORTANT THO VVVVV
 
-	Villager *Partner;				//All of these need to be pointers to instances of the class
+	Villager *Partner;		//All of these need to be pointers to instances of the class
 	
 	//Myers-Briggs stuff (first letter if true)
 	bool mbEI;
@@ -76,4 +78,6 @@ public:
 	};
 
 	Role Job;
+
+	int deathRisk;
 };

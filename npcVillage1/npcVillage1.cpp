@@ -3,6 +3,7 @@
 
 #include "Villager.h"
 #include <iostream>
+#include <ctime>
 
 Villager villager[300];
 int ActiveVillagers = 0;
@@ -43,6 +44,7 @@ void feasabilityDemoPeople()
     villager[0].LegL = Villager::Wound::SCARRED;
     villager[0].LegR = Villager::Wound::MISSING;
     villager[0].Job = Villager::Role::DEAD;
+	villager[0].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -80,6 +82,7 @@ void feasabilityDemoPeople()
     villager[1].LegL = Villager::Wound::FINE;
     villager[1].LegR = Villager::Wound::FINE;
     villager[1].Job = Villager::Role::FARMER;
+	villager[1].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -117,6 +120,7 @@ void feasabilityDemoPeople()
     villager[2].LegL = Villager::Wound::FINE;
     villager[2].LegR = Villager::Wound::FINE;
     villager[2].Job = Villager::Role::SMITH;
+	villager[2].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -154,6 +158,7 @@ void feasabilityDemoPeople()
     villager[3].LegL = Villager::Wound::FINE;
     villager[3].LegR = Villager::Wound::FINE;
     villager[3].Job = Villager::Role::SOLDIER;
+	villager[3].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -191,6 +196,7 @@ void feasabilityDemoPeople()
     villager[4].LegL = Villager::Wound::FINE;
     villager[4].LegR = Villager::Wound::FINE;
     villager[4].Job = Villager::Role::FARMER;
+	villager[4].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -228,6 +234,7 @@ void feasabilityDemoPeople()
     villager[5].LegL = Villager::Wound::FINE;
     villager[5].LegR = Villager::Wound::FINE;
     villager[5].Job = Villager::Role::SMITH;
+	villager[5].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -265,6 +272,7 @@ void feasabilityDemoPeople()
     villager[6].LegL = Villager::Wound::FINE;
     villager[6].LegR = Villager::Wound::FINE;
     villager[6].Job = Villager::Role::WEAVER;
+	villager[6].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -302,6 +310,7 @@ void feasabilityDemoPeople()
     villager[7].LegL = Villager::Wound::FINE;
     villager[7].LegR = Villager::Wound::FINE;
     villager[7].Job = Villager::Role::HUNTER;
+	villager[7].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -339,6 +348,7 @@ void feasabilityDemoPeople()
     villager[8].LegL = Villager::Wound::FINE;
     villager[8].LegR = Villager::Wound::FINE;
     villager[8].Job = Villager::Role::WEAVER;
+	villager[8].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -376,6 +386,7 @@ void feasabilityDemoPeople()
     villager[9].LegL = Villager::Wound::FINE;
     villager[9].LegR = Villager::Wound::FINE;
     villager[9].Job = Villager::Role::HUNTER;
+	villager[9].deathRisk = 0;
 
     ActiveVillagers++;
 
@@ -413,6 +424,7 @@ void feasabilityDemoPeople()
     villager[10].LegL = Villager::Wound::FINE;
     villager[10].LegR = Villager::Wound::FINE;
     villager[10].Job = Villager::Role::HOUSEWIFE;
+	villager[10].deathRisk = 0;
 
     ActiveVillagers++;
 }
@@ -436,10 +448,26 @@ int main()
 
     feasabilityDemoPeople();
 
+	//life simulation test
+	int Year = 0;
+	srand((unsigned)time(0));
+
+	//running for 100 years for testing
+	for (int i = 0; i < 100; i++)
+	{
+		for (int i = 0; i < ActiveVillagers; i++)
+		{
+			villager[i].SimulateYear();
+		}
+
+		std::cout << "\n << A YEAR HAS PASSED, IT IS NOW YEAR " << Year << " >> \n";
+		Year++;
+	}
+
     //gimme that sweet output
     for (int i = 0; i < ActiveVillagers; i++)
     {
-        villager[i].OutputData(villager[i]);
+        villager[i].OutputData();
     }
 }
 
