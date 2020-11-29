@@ -39,13 +39,84 @@ void Villager::NaturalCausesDeath()
 	}
 }
 
+void Villager::PerformJob()
+{
+
+}
+
+void Villager::SeekPartner(Villager(&villagerArray1)[300], int population1, Villager &activeVillager1)
+{
+	int mbSimilarity;
+
+	for (int i = 0; i < population1; i++)
+	{
+		if (Partner == nullptr)
+		{
+			if ((Male != villagerArray1[i].Male) && (villagerArray1[i].Partner == nullptr))
+			{
+				if ((Age - villagerArray1[i].Age < 10) || (villagerArray1[i].Age - Age < 10))
+				{
+					if (villagerArray1[i].Male == false)
+					{
+						mbSimilarity = 0;
+
+						if (mbEI == villagerArray1[i].mbEI)
+						{
+							mbSimilarity++;
+						}
+
+						if (mbSN == villagerArray1[i].mbSN)
+						{
+							mbSimilarity++;
+						}
+
+						if (mbTF == villagerArray1[i].mbTF)
+						{
+							mbSimilarity++;
+						}
+
+						if (mbJP == villagerArray1[i].mbJP)
+						{
+							mbSimilarity++;
+						}
+
+						if (mbSimilarity > 1)
+						{
+							Partner = &villagerArray1[i];
+							villagerArray1[i].Partner = &activeVillager1;
+
+							std::cout << " " << Forename << " " << Surname << " married " << villagerArray1[i].Forename << " " << villagerArray1[i].Surname << "\n";
+
+							if (Male)
+							{
+								villagerArray1[i].Surname = Surname;
+							}
+							else
+							{
+								Surname = villagerArray1[i].Surname;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 //run each potential yearly activity for a villager, as well as incrementing yearly values
-void Villager::SimulateYear(Villager(&villagerArray)[300], int population)
+void Villager::SimulateYear(Villager(&villagerArray)[300], int population, Villager &activeVillager)
 {
 	//The dead can be skipped
 	if (Alive)
 	{
 		Age++;
+
+		PerformJob();
+
+		if ((Partner == nullptr) && (Age > 17))
+		{
+			SeekPartner(villagerArray, population, activeVillager);
+		}
 
 		NaturalCausesDeath(); //do this last to account for and deathRisk gained in the year
 	}

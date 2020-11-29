@@ -457,7 +457,7 @@ int main()
 	{
 		for (int i = 0; i < ActiveVillagers; i++)
 		{
-			villager[i].SimulateYear(villager, ActiveVillagers);
+			villager[i].SimulateYear(villager, ActiveVillagers, villager[i]);
 		}
 
 		std::cout << "\n << A YEAR HAS PASSED, IT IS NOW YEAR " << Year << " >> \n";

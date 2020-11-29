@@ -8,8 +8,10 @@ public:
 	std::string ReturnParent(Villager* PartnerPtr);
 	void SetParentM(Villager* newParentM);
 	void SetParentF(Villager* newParentF);
-	void SimulateYear(Villager (&villagerArray)[300], int population);
+	void SimulateYear(Villager (&villagerArray)[300], int population, Villager &activeVillager);
 	void NaturalCausesDeath();
+	void PerformJob();
+	void SeekPartner(Villager(&villagerArray)[300], int population, Villager &activeVillager1);
 
 	int idNumber;
 	
