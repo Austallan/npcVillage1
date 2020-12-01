@@ -27,21 +27,566 @@ void Villager::SetParentF(Villager* newParentF)
 	ParentF = newParentF;
 }
 
+void Villager::ScarVillager(Villager &activeVillagerX)
+{
+	int randNum = 0;
+
+	randNum = rand() % 5;
+
+	activeVillagerX.deathRisk++;
+
+	switch (randNum)
+	{
+	case 0:
+		if (activeVillagerX.ArmL < 1)
+		{
+			activeVillagerX.ArmL = SCARRED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their left arm\n";
+		}
+		break;
+
+	case 1:
+		if (activeVillagerX.ArmR < 1)
+		{
+			activeVillagerX.ArmR = SCARRED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their right arm\n";
+		}
+		break;
+
+	case 2:
+		if (activeVillagerX.LegL < 1)
+		{
+			activeVillagerX.LegL = SCARRED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their left leg\n";
+		}
+		break;
+
+	case 3:
+		if (activeVillagerX.LegR < 1)
+		{
+			activeVillagerX.LegR = SCARRED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their right leg\n";
+		}
+		break;
+
+	case 4:
+		if (activeVillagerX.Torso < 1)
+		{
+			activeVillagerX.Torso = SCARRED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their torso\n";
+		}
+		break;
+
+	case 5:
+		if (activeVillagerX.Head < 1)
+		{
+			activeVillagerX.Head = SCARRED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their head\n";
+		}
+		break;
+	}
+}
+
+void Villager::BurnVillager(Villager &activeVillagerX)
+{
+	int randNum = 0;
+
+	randNum = rand() % 5;
+
+	activeVillagerX.deathRisk++;
+
+	switch (randNum)
+	{
+	case 0:
+		if (activeVillagerX.ArmL < 2)
+		{
+			activeVillagerX.ArmL = BURNED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their left arm\n";
+		}
+		break;
+
+	case 1:
+		if (activeVillagerX.ArmR < 2)
+		{
+			activeVillagerX.ArmR = BURNED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their right arm\n";
+		}
+		break;
+
+	case 2:
+		if (activeVillagerX.LegL < 2)
+		{
+			activeVillagerX.LegL = BURNED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their left leg\n";
+		}
+		break;
+
+	case 3:
+		if (activeVillagerX.LegR < 2)
+		{
+			activeVillagerX.LegR = BURNED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their right leg\n";
+		}
+		break;
+
+	case 4:
+		if (activeVillagerX.Torso < 2)
+		{
+			activeVillagerX.Torso = BURNED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their torso\n";
+		}
+		break;
+
+	case 5:
+		if (activeVillagerX.Head < 2)
+		{
+			activeVillagerX.Head = BURNED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their head\n";
+		}
+		break;
+	}
+}
+
+void Villager::CrippleVillager(Villager &activeVillagerX)
+{
+	int randNum = 0;
+
+	randNum = rand() % 5;
+
+	activeVillagerX.deathRisk = activeVillagerX.deathRisk = 2;
+
+	switch (randNum)
+	{
+	case 0:
+		if (activeVillagerX.ArmL < 3)
+		{
+			activeVillagerX.ArmL = CRIPPLED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their left arm\n";
+		}
+		break;
+
+	case 1:
+		if (activeVillagerX.ArmR < 3)
+		{
+			activeVillagerX.ArmR = CRIPPLED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their right arm\n";
+		}
+		break;
+
+	case 2:
+		if (activeVillagerX.LegL < 3)
+		{
+			activeVillagerX.LegL = CRIPPLED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their left leg\n";
+		}
+		break;
+
+	case 3:
+		if (activeVillagerX.LegR < 3)
+		{
+			activeVillagerX.LegR = CRIPPLED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their right leg\n";
+		}
+		break;
+
+	case 4:
+		if (activeVillagerX.Torso < 3)
+		{
+			activeVillagerX.Torso = CRIPPLED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their torso\n";
+		}
+		break;
+
+	case 5:
+		if (activeVillagerX.Head < 3)
+		{
+			activeVillagerX.Head = CRIPPLED;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their head\n";
+		}
+		break;
+	}
+}
+
+void Villager::SeverVillager(Villager &activeVillagerX)
+{
+	int randNum = 0;
+
+	randNum = rand() % 5;
+
+	activeVillagerX.deathRisk = activeVillagerX.deathRisk + 3;
+
+	switch (randNum)
+	{
+	case 0:
+		if (activeVillagerX.ArmL < 4)
+		{
+			activeVillagerX.ArmL = MISSING;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their left arm\n";
+		}
+		break;
+
+	case 1:
+		if (activeVillagerX.ArmR < 4)
+		{
+			activeVillagerX.ArmR = MISSING;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their right arm\n";
+		}
+		break;
+
+	case 2:
+		if (activeVillagerX.LegL < 4)
+		{
+			activeVillagerX.LegL = MISSING;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their left leg\n";
+		}
+		break;
+
+	case 3:
+		if (activeVillagerX.LegR < 4)
+		{
+			activeVillagerX.LegR = MISSING;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their left leg\n";
+		}
+		break;
+
+	case 4:
+		if (activeVillagerX.Torso < 4)
+		{
+			activeVillagerX.Torso = MISSING;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their torso\n";
+		}
+		break;
+
+	case 5:
+		if (activeVillagerX.Head < 4)
+		{
+			activeVillagerX.Head = MISSING;
+			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their head\n";
+		}
+		break;
+	}
+}
+
 void Villager::NaturalCausesDeath()
 {
 	
 
-	if ((rand() % 100 + 70) < (Age + deathRisk))
+	if ((rand() % 100 + 70) < (Age + (deathRisk / 2)))
 	{
 		Alive = false;
-		Job = DEAD;
 		std::cout << Forename << " " << Surname << " has died of natural causes at the age of " << Age << "\n";
 	}
 }
 
-void Villager::PerformJob()
+void Villager::PerformJob(Villager &activeVillager2)
 {
+	int jobRisk = 0;
 
+	int riskFactor = 5;
+
+	jobRisk = rand() % 100 + 10 - deathRisk;
+
+	switch (Job)
+	{
+	case DEAD:
+		std::cout << Forename << " is dead and shouldn't output this\n";
+		break;
+
+	case FARMER:
+		//Values Set
+		if (mbEI) { jobRisk = (jobRisk + riskFactor); }
+
+		if (mbSN) { jobRisk = (jobRisk - riskFactor); }
+
+		if (mbTF) { jobRisk = (jobRisk - riskFactor); }
+
+		if (mbJP) { jobRisk = (jobRisk - riskFactor); }
+
+		if (jobRisk < 25)
+		{
+			std::cout << Forename << " " << Surname << " was injured while working as a farmer.\n";
+			
+			if (jobRisk < 25 && jobRisk > 16) //SCARRED
+			{
+				ScarVillager(activeVillager2);
+			}
+
+			if (jobRisk < 15 && jobRisk > 9) //BURNED
+			{
+				BurnVillager(activeVillager2);
+			}
+
+			if (jobRisk < 10 && jobRisk > 5) //CRIPPLED
+			{
+				CrippleVillager(activeVillager2);
+				if (activeVillager2.Head == CRIPPLED)
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+
+			if (jobRisk < 6) //MISSING
+			{
+				SeverVillager(activeVillager2);
+				if ((activeVillager2.Head == MISSING) || (activeVillager2.Torso == MISSING))
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+		}
+
+		break;
+
+	case SMITH:
+		//Looks good?
+		if (mbEI) { jobRisk = (jobRisk - riskFactor); }
+
+		if (mbSN) { jobRisk = (jobRisk - riskFactor); }
+
+		if (mbTF) { jobRisk = (jobRisk - riskFactor); }
+
+		if (mbJP) { jobRisk = (jobRisk + riskFactor); }
+
+		if (jobRisk < 30)
+		{
+			std::cout << Forename << " " << Surname << " was injured while working as a smith.\n";
+
+			if (jobRisk < 30 && jobRisk > 19) //SCARRED
+			{
+				ScarVillager(activeVillager2);
+			}
+
+			if (jobRisk < 20 && jobRisk > 9) //BURNED
+			{
+				BurnVillager(activeVillager2);
+			}
+
+			if (jobRisk < 10 && jobRisk > 5) //CRIPPLED
+			{
+				CrippleVillager(activeVillager2);
+				if (activeVillager2.Head == CRIPPLED)
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+
+			if (jobRisk < 6) //MISSING
+			{
+				SeverVillager(activeVillager2);
+				if ((activeVillager2.Head == MISSING) || (activeVillager2.Torso == MISSING))
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+		}
+		break;
+
+	case HUNTER:
+		//looks good
+		if (mbEI) { jobRisk = (jobRisk - riskFactor); }
+
+		if (mbSN) { jobRisk = (jobRisk + riskFactor); }
+
+		if (!mbTF) { jobRisk = (jobRisk + riskFactor); }
+
+		if (!mbJP) { jobRisk = (jobRisk + riskFactor); }
+
+		if (jobRisk < 30)
+		{
+			std::cout << Forename << " " << Surname << " was injured while working as a hunter.\n";
+
+			if (jobRisk < 30 && jobRisk > 19) //SCARRED
+			{
+				ScarVillager(activeVillager2);
+			}
+
+			if (jobRisk < 20 && jobRisk > 9) //BURNED
+			{
+				BurnVillager(activeVillager2);
+			}
+
+			if (jobRisk < 10 && jobRisk > 5) //CRIPPLED
+			{
+				CrippleVillager(activeVillager2);
+				if (activeVillager2.Head == CRIPPLED)
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+
+			if (jobRisk < 6) //MISSING
+			{
+				SeverVillager(activeVillager2);
+				if ((activeVillager2.Head == MISSING) || (activeVillager2.Torso == MISSING))
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+		}
+		break;
+
+	case HOUSEWIFE:
+		//looks good
+		if (!mbEI) { jobRisk = (jobRisk + riskFactor); }
+
+		if (!mbSN) { jobRisk = (jobRisk + riskFactor); }
+
+		if (!mbTF) { jobRisk = (jobRisk + riskFactor); }
+
+		if (mbJP) { jobRisk = (jobRisk + riskFactor); }
+
+		if (jobRisk < 20)
+		{
+			std::cout << Forename << " " << Surname << " was injured while working as a housewife.\n";
+
+			if (jobRisk < 20 && jobRisk > 9) //SCARRED
+			{
+				ScarVillager(activeVillager2);
+			}
+
+			if (jobRisk < 10 && jobRisk > 6) //BURNED
+			{
+				BurnVillager(activeVillager2);
+			}
+
+			if (jobRisk < 5) //CRIPPLED
+			{
+				CrippleVillager(activeVillager2);
+				if (activeVillager2.Head == CRIPPLED)
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+		}
+		break;
+
+	case WEAVER:
+		//looks good?
+		if (mbEI) { jobRisk = (jobRisk + riskFactor); }
+
+		if (!mbSN) { jobRisk = (jobRisk + riskFactor); }
+
+		if (mbTF) { jobRisk = (jobRisk - riskFactor); }
+
+		if (mbJP) { jobRisk = (jobRisk - riskFactor); }
+
+		if (jobRisk < 20)
+		{
+			std::cout << Forename << " " << Surname << " was injured while working as a weaver.\n";
+
+			if (jobRisk < 20 && jobRisk > 9) //SCARRED
+			{
+				ScarVillager(activeVillager2);
+			}
+
+			if (jobRisk < 10 && jobRisk > 6) //BURNED
+			{
+				BurnVillager(activeVillager2);
+			}
+
+			if (jobRisk < 5) //CRIPPLED
+			{
+				CrippleVillager(activeVillager2);
+				if (activeVillager2.Head == CRIPPLED)
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+
+		}
+		break;
+
+	case SOLDIER:
+		//looks good?
+		if (mbEI) { jobRisk = (jobRisk + riskFactor); }
+
+		if (!mbSN) { jobRisk = (jobRisk + riskFactor); }
+
+		if (!mbTF) { jobRisk = (jobRisk + riskFactor); }
+
+		if (mbJP) { jobRisk = (jobRisk + riskFactor); }
+
+		if (jobRisk < 40)
+		{
+			std::cout << Forename << " " << Surname << " was injured while working as a soldier.\n";
+
+			if (jobRisk < 40 && jobRisk > 26) //SCARRED
+			{
+				ScarVillager(activeVillager2);
+			}
+
+			if (jobRisk < 25 && jobRisk > 16) //BURNED
+			{
+				BurnVillager(activeVillager2);
+			}
+
+			if (jobRisk < 15 && jobRisk > 7) //CRIPPLED
+			{
+				CrippleVillager(activeVillager2);
+				if (activeVillager2.Head == CRIPPLED)
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+
+			if (jobRisk < 8) //MISSING
+			{
+				std::cout << Forename << " lost their ";
+				SeverVillager(activeVillager2);
+				if ((activeVillager2.Head == MISSING) || (activeVillager2.Torso == MISSING))
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+		}
+		break;
+
+	case CHILD:
+		//Values good?
+		if (mbEI) { jobRisk = (jobRisk + riskFactor); }
+
+		if (mbSN) { jobRisk = (jobRisk - riskFactor); }
+
+		if (mbTF) { jobRisk = (jobRisk + riskFactor); }
+
+		if (mbJP) { jobRisk = (jobRisk - riskFactor); }
+
+		if (jobRisk < 15)
+		{
+			std::cout << Forename << " " << Surname << " was injured while playing.\n";
+
+			if (jobRisk < 15 && jobRisk > 9) //SCARRED
+			{
+				ScarVillager(activeVillager2);
+			}
+
+			if (jobRisk < 10 && jobRisk > 5) //BURNED
+			{
+				BurnVillager(activeVillager2);
+			}
+
+			if (jobRisk < 6) //CRIPPLED
+			{
+				CrippleVillager(activeVillager2);
+				if (activeVillager2.Head == CRIPPLED)
+				{
+					std::cout << Forename << " " << Surname << " died from their injuries\n";
+					activeVillager2.Alive = false;
+				}
+			}
+		}
+		break;
+	}
 }
 
 void Villager::SeekPartner(Villager(&villagerArray1)[300], int population1, Villager &activeVillager1)
@@ -111,7 +656,7 @@ void Villager::SimulateYear(Villager(&villagerArray)[300], int population, Villa
 	{
 		Age++;
 
-		PerformJob();
+		PerformJob(activeVillager);
 
 		if ((Partner == nullptr) && (Age > 17))
 		{
@@ -121,7 +666,6 @@ void Villager::SimulateYear(Villager(&villagerArray)[300], int population, Villa
 		NaturalCausesDeath(); //do this last to account for and deathRisk gained in the year
 	}
 }
-
 
 //Print all the data for all villagers to the console
 void Villager::OutputData()
