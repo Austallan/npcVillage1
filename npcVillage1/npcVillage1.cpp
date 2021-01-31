@@ -11,7 +11,7 @@
 using namespace std;
 
 //Villager array variables
-Villager villager[300];
+Villager villager[3000];
 int ActiveVillagers = 0;
 
 //Name array variables
@@ -629,7 +629,7 @@ int main()
 	int loop = 0;
 	//FIRST read in all of the names to be used for random generation
 	// Open an existing file
-	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\NameSheets\\BoyNames.csv");
+	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\npcVillage1\\NameSheets\\BoyNames.csv");
 	while (!fin.eof()) {
 		MaleNameCount++;
 		fin >> line;
@@ -641,7 +641,7 @@ int main()
 	loop = 0;
 
 	// Open an existing file
-	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\NameSheets\\GirlNames.csv");
+	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\npcVillage1\\NameSheets\\GirlNames.csv");
 	while (!fin.eof()) {
 		FemaleNameCount++;
 		fin >> line;
@@ -653,7 +653,7 @@ int main()
 	loop = 0;
 
 	// Open an existing file
-	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\NameSheets\\Surnames.csv");
+	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\npcVillage1\\NameSheets\\Surnames.csv");
 	while (!fin.eof()) {
 		SurnamesCount++;
 		fin >> line;

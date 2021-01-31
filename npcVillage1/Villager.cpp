@@ -589,7 +589,7 @@ void Villager::PerformJob(Villager &activeVillager2)
 	}
 }
 
-void Villager::SeekPartner(Villager(&villagerArray1)[300], int population1, Villager &activeVillager1)
+void Villager::SeekPartner(Villager(&villagerArray1)[3000], int population1, Villager &activeVillager1)
 {
 	int mbSimilarity;
 
@@ -648,7 +648,7 @@ void Villager::SeekPartner(Villager(&villagerArray1)[300], int population1, Vill
 	}
 }
 
-void Villager::HaveChild(Villager(&villagerArray)[300], Villager &mother, Villager &father, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear)
+void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villager &father, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear)
 {
 	//Fiddly, will clean up for now and fix soon
 	int actiV = activeVillagersRef;
@@ -827,7 +827,7 @@ void Villager::GrowUp()
 }
 
 //run each potential yearly activity for a villager, as well as incrementing yearly values
-void Villager::SimulateYear(Villager(&villagerArray)[300], int population, Villager &activeVillager, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string(&surnames)[2089], std::string theTown, int& activeVillagersRef, int currentYear)
+void Villager::SimulateYear(Villager(&villagerArray)[3000], int population, Villager &activeVillager, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string(&surnames)[2089], std::string theTown, int& activeVillagersRef, int currentYear)
 {
 	//The dead can be skipped
 	if (Alive)
@@ -895,9 +895,9 @@ void Villager::OutputData()
 
 	//Parents
 	std::cout << "\n Father: ";
-		if (ParentF != NULL)
+		if (ParentM != NULL)
 		{
-			std::cout << ReturnParent(ParentF) << "   ";
+			std::cout << ReturnParent(ParentM) << "   ";
 		}
 		else 
 		{
@@ -905,10 +905,10 @@ void Villager::OutputData()
 		}
 
 		std::cout << "Mother: ";
-		if (ParentM != NULL)
+		if (ParentF != NULL)
 		{
 			//std::cout << subject.ParentF->Forename << " " << subject.ParentF->Surname;
-			std::cout << ReturnParent(ParentM);
+			std::cout << ReturnParent(ParentF);
 		}
 		else
 		{

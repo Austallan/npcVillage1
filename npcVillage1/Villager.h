@@ -14,11 +14,11 @@ public:
 	void CrippleVillager(Villager &activeVillagerX);
 	void SeverVillager(Villager &activeVillagerX);
 
-	void SimulateYear(Villager(&villagerArray)[300], int population, Villager &activeVillager, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string(&surnames)[2089], std::string theTown, int& activeVillagersRef, int currentYear);
+	void SimulateYear(Villager(&villagerArray)[3000], int population, Villager &activeVillager, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string(&surnames)[2089], std::string theTown, int& activeVillagersRef, int currentYear);
 	void NaturalCausesDeath();
 	void PerformJob(Villager &activeVillager2);
-	void SeekPartner(Villager(&villagerArray)[300], int population, Villager &activeVillager1);
-	void HaveChild(Villager(&villagerArray)[300], Villager &mother, Villager &father, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear);
+	void SeekPartner(Villager(&villagerArray)[3000], int population, Villager &activeVillager1);
+	void HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villager &father, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear);
 	void GrowUp();
 
 	int idNumber;//will help with identification at output
