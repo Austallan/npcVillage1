@@ -152,9 +152,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="npcVillage1.cpp" />
+    <ClCompile Include="OtherTown.cpp" />
     <ClCompile Include="Villager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="OtherTown.h" />
     <ClInclude Include="Villager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

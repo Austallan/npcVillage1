@@ -14,25 +14,29 @@ public:
 	void CrippleVillager(Villager &activeVillagerX);
 	void SeverVillager(Villager &activeVillagerX);
 
-	void SimulateYear(Villager (&villagerArray)[300], int population, Villager &activeVillager);
+	void SimulateYear(Villager(&villagerArray)[300], int population, Villager &activeVillager, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string(&surnames)[2089], std::string theTown, int& activeVillagersRef, int currentYear);
 	void NaturalCausesDeath();
 	void PerformJob(Villager &activeVillager2);
 	void SeekPartner(Villager(&villagerArray)[300], int population, Villager &activeVillager1);
+	void HaveChild(Villager(&villagerArray)[300], Villager &mother, Villager &father, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear);
+	void GrowUp();
 
-	int idNumber;
+	int idNumber;//will help with identification at output
 	
+	bool Male;  //Trust me, it's easier to remember this way
+
 	int BirthYear;
 
 	int Age;
 
 	bool Alive;
 
+	bool isPregnant;
+
 	std::string Forename;
 	std::string Surname;
 
 	int FriendCount;
-
-	bool Male;  //Trust me, it's easier to remember this way
 
 	Villager *Kid[4];      //REMEMBER TO SET THE ARRAY UP FOR MAX KIDS LATER
 
@@ -40,9 +44,9 @@ public:
 
 	std::string Location;
 
-	Villager *ParentF;
+	Villager *ParentF;//Female Parent
 
-	Villager *ParentM;
+	Villager *ParentM;//Male Parent
 
 	Villager *Friends[4];   //SAME BUT FOR FRIENDS, NOT AS IMPORTANT THO VVVVV
 

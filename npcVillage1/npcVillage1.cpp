@@ -2,11 +2,32 @@
 //
 
 #include "Villager.h"
+#include "OtherTown.h"
+#include <fstream>
 #include <iostream>
+#include <string>
 #include <ctime>
 
+using namespace std;
+
+//Villager array variables
 Villager villager[300];
 int ActiveVillagers = 0;
+
+//Name array variables
+string MaleNamesArray[241];//240
+int MaleNameCount = 0;
+
+string FemaleNamesArray[328];//327
+int FemaleNameCount = 0;
+
+string SurnamesArray[2089];//2088
+int SurnamesCount = 0;
+
+bool RandBool()
+{
+	return rand() % 2 == 0;
+}
 
 void feasabilityDemoPeople()
 {
@@ -429,36 +450,289 @@ void feasabilityDemoPeople()
     ActiveVillagers++;
 }
 
+void firstGeneration(int gen1, string homeTown)
+{
+	//Baby steps, let's create the base villager to act as "Parents" to the first generation
+//can put this away as a function later and put him as Villager 0
+	villager[0].idNumber = 0;
+	villager[0].BirthYear = -99;
+	villager[0].Age = 99;
+	villager[0].Alive = false;
+	villager[0].isPregnant = false;
+	villager[0].Forename = "Fimbultyr";
+	villager[0].Surname = "Allfather";
+	villager[0].FriendCount = 0;
+	villager[0].Male = true;
+	for (int i = 0; i <= 4; i++)
+	{
+		villager[0].Kid[i] = NULL;
+	}
+	villager[0].KidCount = 0;
+	villager[0].Location = "Valhalla";
+	villager[0].ParentF = NULL;
+	villager[0].ParentM = NULL;
+	for (int i = 0; i <= 4; i++)
+	{
+		villager[0].Friends[i] = NULL;
+	}
+	villager[0].Partner = NULL;
+	villager[0].mbEI = true;
+	villager[0].mbSN = true;
+	villager[0].mbTF = true;
+	villager[0].mbJP = true;
+	villager[0].Head = Villager::Wound::MISSING;
+	villager[0].Torso = Villager::Wound::CRIPPLED;
+	villager[0].ArmL = Villager::Wound::BURNED;
+	villager[0].ArmR = Villager::Wound::FINE;
+	villager[0].LegL = Villager::Wound::SCARRED;
+	villager[0].LegR = Villager::Wound::MISSING;
+	villager[0].Job = Villager::Role::DEAD;
+	villager[0].deathRisk = 0;
+
+	ActiveVillagers++;
+
+	for (int j = 1; j <= gen1; j++)
+	{
+		//Make sure to have 50/50 men and women for the first wave
+		villager[j].idNumber = ActiveVillagers;
+		if(((gen1/2) + 1) > j)
+		{
+			villager[j].Male = false;
+		}
+		else
+		{
+			villager[j].Male = true;
+		}
+		villager[j].BirthYear = -20;
+		villager[j].Age = 20;
+		villager[j].Alive = true;
+		villager[j].isPregnant = false;
+		if (villager[j].Male)
+		{
+			villager[j].Forename = MaleNamesArray[(rand() % MaleNameCount)];
+		}
+		else
+		{
+			villager[j].Forename = FemaleNamesArray[(rand() % FemaleNameCount)];
+		}
+		villager[j].Surname = SurnamesArray[(rand() % SurnamesCount)];//
+		villager[j].FriendCount = 0;
+		for (int i = 0; i <= 4; i++)
+		{
+			villager[j].Kid[i] = NULL;
+		}
+		villager[j].KidCount = 0;
+		villager[j].Location = homeTown;
+		villager[j].SetParentF(&villager[0]);
+		villager[j].SetParentM(&villager[0]);
+		for (int i = 0; i <= 4; i++)
+		{
+			villager[j].Friends[i] = NULL;
+		}
+		villager[j].Partner = NULL;
+		if (rand() % 2 == 0)
+		{
+			villager[j].mbEI = true;//
+		}
+		else 
+		{
+			villager[j].mbEI = false;//
+		}
+
+		if (rand() % 2 == 0)
+		{
+			villager[j].mbSN = true;//
+		}
+		else
+		{
+			villager[j].mbSN = false;//
+		}
+
+		if (rand() % 2 == 0)
+		{
+			villager[j].mbTF = true;//
+		}
+		else
+		{
+			villager[j].mbTF = false;//
+		}
+
+		if (rand() % 2 == 0)
+		{
+			villager[j].mbJP = true;//
+		}
+		else
+		{
+			villager[j].mbJP = false;//
+		}
+
+		villager[j].Head = Villager::Wound::FINE;
+		villager[j].Torso = Villager::Wound::FINE;
+		villager[j].ArmL = Villager::Wound::FINE;
+		villager[j].ArmR = Villager::Wound::FINE;
+		villager[j].LegL = Villager::Wound::FINE;
+		villager[j].LegR = Villager::Wound::FINE;
+		if (villager[j].Male)
+		{
+			switch (rand() % 3)
+			{
+			case 0:
+				villager[j].Job = Villager::Role::FARMER;//
+				break;
+
+			case 1:
+				villager[j].Job = Villager::Role::SMITH;//
+				break;
+
+			case 2:
+				villager[j].Job = Villager::Role::SOLDIER;//
+				break;
+
+			case 3:
+				villager[j].Job = Villager::Role::HUNTER;//
+				break;
+			}
+		}
+		else
+		{
+			switch (rand() % 2)
+			{
+			case 0:
+				villager[j].Job = Villager::Role::WEAVER;//
+				break;
+
+			case 1:
+				villager[j].Job = Villager::Role::HOUSEWIFE;//
+				break;
+
+			case 2:
+				villager[j].Job = Villager::Role::FARMER;//
+				break;
+			}
+		}
+		villager[j].deathRisk = 0;
+
+		ActiveVillagers++;
+	}
+}
+
 int main()
 {
     int MaxVillagers = 10;
+	int StartVillagers = 10;
+	int seed = 3000;
 
-    ////Make sure the user input values for max number of Villagers is between 10 and 300, values may change later and won't be used for feasability demo
-    //int InputMaxVillagers;
-    //std::cout << "\n Enter the Max number of villagers (10-300)\n";
-    //std::cin >> InputMaxVillagers;
+	std::cout << "<<<<	LOADING VILLAGER NAMES	>>>>\n";
 
-    //while (InputMaxVillagers < 10 || InputMaxVillagers > 300)
-    //{
-    //    std::cout << "Input invalid, please enter a value between 10 and 300\n";
-    //    std::cin >> InputMaxVillagers;
-    //}
+	ifstream fin;
+	string line;
+	int loop = 0;
+	//FIRST read in all of the names to be used for random generation
+	// Open an existing file
+	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\NameSheets\\BoyNames.csv");
+	while (!fin.eof()) {
+		MaleNameCount++;
+		fin >> line;
+		MaleNamesArray[loop] = line;
+		loop++;
+	}
 
-    //MaxVillagers = InputMaxVillagers;
+	fin.close();
+	loop = 0;
 
-    feasabilityDemoPeople();
+	// Open an existing file
+	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\NameSheets\\GirlNames.csv");
+	while (!fin.eof()) {
+		FemaleNameCount++;
+		fin >> line;
+		FemaleNamesArray[loop] = line;
+		loop++;
+	}
+
+	fin.close();
+	loop = 0;
+
+	// Open an existing file
+	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\NameSheets\\Surnames.csv");
+	while (!fin.eof()) {
+		SurnamesCount++;
+		fin >> line;
+		SurnamesArray[loop] = line;
+		loop++;
+	}
+
+	fin.close();
+
+	std::cout << "<<<<	VILLAGER NAMES LOADED	>>>>\n";
+
+	string villageName = "";
+	//Get the village named
+	std::cout << "\n Please enter the name of the village\n";
+	std::cin >> villageName;
+
+	while (villageName.empty())
+	{
+		std::cout << "Invalid input, please enter a name for the village\n";
+		std::cin >> villageName;
+	}
+
+	villageName[0] = toupper(villageName[0]);
+
+	for (std::size_t i = 1; i < villageName.length(); ++i)
+		villageName[i] = tolower(villageName[i]);
+
+	//Make sure the user input values for the starting number of Villagers is between 10 and 50, values may change later
+	std::cout << "\n Enter the starting number of villagers (10-50)\n";
+	std::cin >> StartVillagers;
+
+	while (StartVillagers < 10 || StartVillagers > 50)
+	{
+		std::cout << "Input invalid, please enter a value between 10 and 50\n";
+		std::cin >> StartVillagers;
+	}
+
+
+    //Make sure the user input values for max number of Villagers is between 10 and 300, values may change later and won't be used for feasability demo
+    std::cout << "\n Enter the Max number of villagers (10-300)\n";
+    std::cin >> MaxVillagers;
+
+    while (MaxVillagers < StartVillagers || MaxVillagers > 300)
+    {
+        std::cout << "Input invalid, please enter a value between " << StartVillagers << " and 300\n";
+        std::cin >> MaxVillagers;
+    }
+	
+	//input a seed for generating a village
+	std::cout << "\n Please input a positive integer to act as the seed\n";
+	std::cin >> seed;
+
+	while (seed < 0)
+	{
+		std::cout << "The seed must be a positive integer, please enter a new seed\n";
+		std::cin >> seed;
+	}
+
+	OtherTown town1("East", 10);
+	OtherTown town2("West", 10);
+
+    //feasabilityDemoPeople(); //for the demo, needs replacing
+	firstGeneration(StartVillagers, villageName);//Generates the first 10-50 villagers (depending on player input)
 
 	//life simulation test
 	int Year = 0;
-	srand((unsigned)time(0));
+	//srand((unsigned)time(0));
+	std::srand(seed);
 
 	//running for 100 years for testing
 	for (int i = 0; i < 100; i++)
 	{
 		for (int i = 0; i < ActiveVillagers; i++)
 		{
-			villager[i].SimulateYear(villager, ActiveVillagers, villager[i]);
+			villager[i].SimulateYear(villager, ActiveVillagers, villager[i], MaleNamesArray, MaleNameCount,FemaleNamesArray, FemaleNameCount, SurnamesArray, villageName, ActiveVillagers, Year);
 		}
+
+		town1.populationChange();
+		town2.populationChange();
 
 		std::cout << "\n << A YEAR HAS PASSED, IT IS NOW YEAR " << Year << " >> \n";
 		Year++;
@@ -469,15 +743,8 @@ int main()
     {
         villager[i].OutputData();
     }
-}
 
-
-
-
-
-void firstGeneration()
-{
-
+	std::cout << "\n Generated using seed: " << seed << endl;
 }
 
 
