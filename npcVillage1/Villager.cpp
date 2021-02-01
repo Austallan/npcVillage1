@@ -648,7 +648,7 @@ void Villager::SeekPartner(Villager(&villagerArray1)[3000], int population1, Vil
 	}
 }
 
-void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villager &father, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear)
+void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villager &father, std::string(foreNamesM)[241], int foreMLength, std::string(foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear)
 {
 	//Fiddly, will clean up for now and fix soon
 	int actiV = activeVillagersRef;
@@ -691,6 +691,11 @@ void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villa
 		villagerArray[actiV].Kid[i] = NULL;
 	}
 	villagerArray[actiV].KidCount = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		villagerArray[actiV].dialogue[i] = "NULL";
+	}
+	villagerArray[actiV].dCount = 0;
 	villagerArray[actiV].Location = theTown;
 	villagerArray[actiV].SetParentF(&mother);
 	villagerArray[actiV].SetParentM(&father);
@@ -784,14 +789,29 @@ void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villa
 	activeVillagersRef++;
 }
 
-void Villager::GrowUp()
+void Villager::GrowUp(Villager(villagerArray)[3000], int activeRef)
 {
+	int workingVillagers = 0;
+	int foodVillagers = 0;
+
+	for (int i = 1; i < activeRef; i++)
+	{
+		if (villagerArray[i].Job == FARMER)//track the number of food providers
+		{
+			foodVillagers++;
+			workingVillagers++;
+		}
+		else if (villagerArray[i].Job != DEAD || villagerArray[i].Job != CHILD)
+			workingVillagers++;		
+	}
+		
+	//set their job, although Farming takes priority
 	if (Male)
 	{
 		switch (rand() % 3)
 		{
 		case 0:
-			Job = Villager::Role::FARMER;//
+			Job = Villager::Role::HUNTER;//
 			break;
 
 		case 1:
@@ -800,10 +820,6 @@ void Villager::GrowUp()
 
 		case 2:
 			Job = Villager::Role::SOLDIER;//
-			break;
-
-		case 3:
-			Job = Villager::Role::HUNTER;//
 			break;
 		}
 	}
@@ -818,16 +834,20 @@ void Villager::GrowUp()
 		case 1:
 			Job = Villager::Role::HOUSEWIFE;//
 			break;
-
-		case 2:
-			Job = Villager::Role::FARMER;//
-			break;
 		}
+	}
+
+	//https://www.mdpi.com/2079-9276/5/4/47/pdf
+	//1 person can feed 5 in a year (non mechanised)
+
+	if ((foodVillagers * 5) < workingVillagers)//therefore 1/5 of the population must produce food
+	{
+		Job = Villager::Role::FARMER;
 	}
 }
 
 //run each potential yearly activity for a villager, as well as incrementing yearly values
-void Villager::SimulateYear(Villager(&villagerArray)[3000], int population, Villager &activeVillager, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string(&surnames)[2089], std::string theTown, int& activeVillagersRef, int currentYear)
+void Villager::SimulateYear(Villager(&villagerArray)[3000], int population, Villager &activeVillager, std::string(foreNamesM)[241], int foreMLength, std::string(foreNamesF)[328], int foreFLength, std::string(surnames)[2089], std::string theTown, int& activeVillagersRef, int currentYear)
 {
 	//The dead can be skipped
 	if (Alive)
@@ -836,7 +856,7 @@ void Villager::SimulateYear(Villager(&villagerArray)[3000], int population, Vill
 
 		if ((Age > 15) && Job == CHILD)
 		{
-			GrowUp();
+			GrowUp(villagerArray, activeVillagersRef);
 			std::cout << Forename << " turned 16 and is now an adult\n";
 		}
 		PerformJob(activeVillager);
@@ -852,7 +872,7 @@ void Villager::SimulateYear(Villager(&villagerArray)[3000], int population, Vill
 			isPregnant = false;
 		}
 
-		if (!Male && (Partner != nullptr) && !isPregnant && KidCount < (sizeof(Kid)/sizeof(Kid[0]) - 1) && (Partner->Job != DEAD))
+		if (!Male && (Partner != nullptr) && !isPregnant && KidCount < (sizeof(Kid)/sizeof(Kid[0]) - 1) && (Partner->Job != DEAD) && Age < 51)
 		{
 			if ((rand() % 10) < 1)
 				isPregnant = true;

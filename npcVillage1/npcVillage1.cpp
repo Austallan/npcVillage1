@@ -468,6 +468,12 @@ void firstGeneration(int gen1, string homeTown)
 		villager[0].Kid[i] = NULL;
 	}
 	villager[0].KidCount = 0;
+	villager[0].dialogue[0] = "Created the universe in a time before memory";
+	for (int i = 1; i < 5; i++)
+	{
+		villager[0].dialogue[i] = "NULL";
+	}
+	villager[0].dCount = 0;
 	villager[0].Location = "Valhalla";
 	villager[0].ParentF = NULL;
 	villager[0].ParentM = NULL;
@@ -522,6 +528,11 @@ void firstGeneration(int gen1, string homeTown)
 			villager[j].Kid[i] = NULL;
 		}
 		villager[j].KidCount = 0;
+		for (int i = 0; i < 5; i++)
+		{
+			villager[j].dialogue[i] = "NULL";
+		}
+		villager[j].dCount = 0;
 		villager[j].Location = homeTown;
 		villager[j].SetParentF(&villager[0]);
 		villager[j].SetParentM(&villager[0]);
@@ -682,23 +693,23 @@ int main()
 		villageName[i] = tolower(villageName[i]);
 
 	//Make sure the user input values for the starting number of Villagers is between 10 and 50, values may change later
-	std::cout << "\n Enter the starting number of villagers (10-50)\n";
+	std::cout << "\n Enter the starting number of villagers (10-100)\n";
 	std::cin >> StartVillagers;
 
-	while (StartVillagers < 10 || StartVillagers > 50)
+	while (StartVillagers < 10 || StartVillagers > 100)
 	{
-		std::cout << "Input invalid, please enter a value between 10 and 50\n";
+		std::cout << "Input invalid, please enter a value between 10 and 100\n";
 		std::cin >> StartVillagers;
 	}
 
 
     //Make sure the user input values for max number of Villagers is between 10 and 300, values may change later and won't be used for feasability demo
-    std::cout << "\n Enter the Max number of villagers (10-300)\n";
+    std::cout << "\n Enter the Max number of villagers (10-2999)\n";
     std::cin >> MaxVillagers;
 
-    while (MaxVillagers < StartVillagers || MaxVillagers > 300)
+    while (MaxVillagers < StartVillagers || MaxVillagers > 2999)
     {
-        std::cout << "Input invalid, please enter a value between " << StartVillagers << " and 300\n";
+        std::cout << "Input invalid, please enter a value between " << StartVillagers << " and 2999\n";
         std::cin >> MaxVillagers;
     }
 	

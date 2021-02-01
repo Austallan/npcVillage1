@@ -14,12 +14,12 @@ public:
 	void CrippleVillager(Villager &activeVillagerX);
 	void SeverVillager(Villager &activeVillagerX);
 
-	void SimulateYear(Villager(&villagerArray)[3000], int population, Villager &activeVillager, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string(&surnames)[2089], std::string theTown, int& activeVillagersRef, int currentYear);
+	void SimulateYear(Villager(&villagerArray)[3000], int population, Villager &activeVillager, std::string(foreNamesM)[241], int foreMLength, std::string(foreNamesF)[328], int foreFLength, std::string(surnames)[2089], std::string theTown, int& activeVillagersRef, int currentYear);
 	void NaturalCausesDeath();
 	void PerformJob(Villager &activeVillager2);
 	void SeekPartner(Villager(&villagerArray)[3000], int population, Villager &activeVillager1);
-	void HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villager &father, std::string(&foreNamesM)[241], int foreMLength, std::string(&foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear);
-	void GrowUp();
+	void HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villager &father, std::string(foreNamesM)[241], int foreMLength, std::string(foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear);
+	void GrowUp(Villager(villagerArray)[3000], int activeRef);
 
 	int idNumber;//will help with identification at output
 	
@@ -38,9 +38,13 @@ public:
 
 	int FriendCount;
 
-	Villager *Kid[4];      //REMEMBER TO SET THE ARRAY UP FOR MAX KIDS LATER
+	Villager *Kid[6];      //REMEMBER TO SET THE ARRAY UP FOR MAX KIDS LATER
 
 	int KidCount;
+
+	std::string dialogue[5];
+
+	int dCount;
 
 	std::string Location;
 
