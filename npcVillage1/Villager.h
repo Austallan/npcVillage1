@@ -42,7 +42,7 @@ public:
 
 	int KidCount;
 
-	std::string dialogue[5];
+	std::string dialogue[5][2];
 
 	int dCount;
 

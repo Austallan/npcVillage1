@@ -17,5 +17,5 @@ void OtherTown::populationChange()
 void OtherTown::emigrate()
 {
 	population--;
-
+	//TODO
 }

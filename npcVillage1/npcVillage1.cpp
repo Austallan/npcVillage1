@@ -468,10 +468,14 @@ void firstGeneration(int gen1, string homeTown)
 		villager[0].Kid[i] = NULL;
 	}
 	villager[0].KidCount = 0;
-	villager[0].dialogue[0] = "Created the universe in a time before memory";
+	villager[0].dialogue[0][0] = "What have the Gods ever done for us?";
+	villager[0].dialogue[0][1] = "Created the universe in a time before memory";
 	for (int i = 1; i < 5; i++)
 	{
-		villager[0].dialogue[i] = "NULL";
+		for (int k = 0; i < 2; i++)
+		{
+			villager[0].dialogue[i][k] = "NULL";
+		}
 	}
 	villager[0].dCount = 0;
 	villager[0].Location = "Valhalla";
@@ -530,7 +534,10 @@ void firstGeneration(int gen1, string homeTown)
 		villager[j].KidCount = 0;
 		for (int i = 0; i < 5; i++)
 		{
-			villager[j].dialogue[i] = "NULL";
+			for (int k = 0; i < 2; i++)
+			{
+				villager[j].dialogue[i][k] = "NULL";
+			}
 		}
 		villager[j].dCount = 0;
 		villager[j].Location = homeTown;
@@ -640,7 +647,7 @@ int main()
 	int loop = 0;
 	//FIRST read in all of the names to be used for random generation
 	// Open an existing file
-	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\npcVillage1\\NameSheets\\BoyNames.csv");
+	fin.open("..\\NameSheets\\BoyNames.csv");
 	while (!fin.eof()) {
 		MaleNameCount++;
 		fin >> line;
@@ -652,7 +659,7 @@ int main()
 	loop = 0;
 
 	// Open an existing file
-	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\npcVillage1\\NameSheets\\GirlNames.csv");
+	fin.open("..\\NameSheets\\GirlNames.csv");
 	while (!fin.eof()) {
 		FemaleNameCount++;
 		fin >> line;
@@ -664,7 +671,7 @@ int main()
 	loop = 0;
 
 	// Open an existing file
-	fin.open("C:\\Users\\austi\\Documents\\4th Year\\CMP400\\Project\\npcVillage1\\NameSheets\\Surnames.csv");
+	fin.open("..\\NameSheets\\Surnames.csv");
 	while (!fin.eof()) {
 		SurnamesCount++;
 		fin >> line;

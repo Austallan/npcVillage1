@@ -1,8 +1,6 @@
 #include "Villager.h"
 #include <iostream>
 
-
-
 //FUNCTIONS DOWN HERE												FUNCTIONS DOWN HERE
 //VVVVVVVVVVVVVVVVVVV												VVVVVVVVVVVVVVVVVVV
 std::string Villager::ReturnParent(Villager* PartnerPtr)
@@ -650,143 +648,167 @@ void Villager::SeekPartner(Villager(&villagerArray1)[3000], int population1, Vil
 
 void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villager &father, std::string(foreNamesM)[241], int foreMLength, std::string(foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear)
 {
-	//Fiddly, will clean up for now and fix soon
-	int actiV = activeVillagersRef;
+	bool birthSuccess = true;
 
-	villagerArray[actiV].idNumber = actiV;
-	if (rand() % 2 == 0)
+	if ((rand() % 10) < 0)
 	{
-		villagerArray[actiV].Male = false;
-	}
-	else
-	{
-		villagerArray[actiV].Male = true;
-	}
-	villagerArray[actiV].BirthYear = currentYear;
-	villagerArray[actiV].Age = 0;
-	villagerArray[actiV].Alive = true;
-	villagerArray[actiV].isPregnant = false;
-	if (villagerArray[actiV].Male)
-	{
-		if ((rand() % 15) < 1 && father.ParentM->Forename != "Fimbultyr")
+		if ((rand() % 5) < 0)
 		{
-			villagerArray[actiV].Forename = father.ParentM->Forename;
+			mother.Job = DEAD;
+			mother.Alive = false;
+			std::cout << mother.Forename << " " << mother.Surname << " died in childbirth. The baby also died.\n";
+			birthSuccess = false;
 		}
 		else
-		villagerArray[actiV].Forename = foreNamesM[(rand() % foreMLength)];
-	}
-	else
-	{
-		if ((rand() % 15) < 1 && mother.ParentF->Forename != "Fimbultyr")
 		{
-			villagerArray[actiV].Forename = mother.ParentF->Forename;
+			mother.Job = DEAD;
+			mother.Alive = false;
+			std::cout << mother.Forename << " " << mother.Surname << " died in childbirth. The baby survived.\n";
+		}
+	}
+
+	if(birthSuccess)
+	{//Fiddly, will clean up for now and fix soon
+		int actiV = activeVillagersRef;
+
+		villagerArray[actiV].idNumber = actiV;
+		if (rand() % 2 == 0)
+		{
+			villagerArray[actiV].Male = false;
 		}
 		else
-		villagerArray[actiV].Forename = foreNamesF[(rand() % foreFLength)];
-	}
-	villagerArray[actiV].Surname = father.Surname;//
-	villagerArray[actiV].FriendCount = 0;
-	for (int i = 0; i <= 4; i++)
-	{
-		villagerArray[actiV].Kid[i] = NULL;
-	}
-	villagerArray[actiV].KidCount = 0;
-	for (int i = 0; i < 5; i++)
-	{
-		villagerArray[actiV].dialogue[i] = "NULL";
-	}
-	villagerArray[actiV].dCount = 0;
-	villagerArray[actiV].Location = theTown;
-	villagerArray[actiV].SetParentF(&mother);
-	villagerArray[actiV].SetParentM(&father);
-	for (int i = 0; i <= 4; i++)
-	{
-		villagerArray[actiV].Friends[i] = NULL;
-	}
-	villagerArray[actiV].Partner = NULL;
+		{
+			villagerArray[actiV].Male = true;
+		}
+		villagerArray[actiV].BirthYear = currentYear;
+		villagerArray[actiV].Age = 0;
+		villagerArray[actiV].Alive = true;
+		villagerArray[actiV].isPregnant = false;
+		if (villagerArray[actiV].Male)
+		{
+			if ((rand() % 15) < 1 && father.ParentM->Forename != "Fimbultyr")
+			{
+				villagerArray[actiV].Forename = father.ParentM->Forename;
+			}
+			else
+				villagerArray[actiV].Forename = foreNamesM[(rand() % foreMLength)];
+		}
+		else
+		{
+			if ((rand() % 15) < 1 && mother.ParentF->Forename != "Fimbultyr")
+			{
+				villagerArray[actiV].Forename = mother.ParentF->Forename;
+			}
+			else
+				villagerArray[actiV].Forename = foreNamesF[(rand() % foreFLength)];
+		}
+		villagerArray[actiV].Surname = father.Surname;//
+		villagerArray[actiV].FriendCount = 0;
+		for (int i = 0; i <= 4; i++)
+		{
+			villagerArray[actiV].Kid[i] = NULL;
+		}
+		villagerArray[actiV].KidCount = 0;
+		for (int i = 0; i < 5; i++)
+		{
+			for (int k = 0; i < 2; i++)
+			{
+				villagerArray[actiV].dialogue[i][k] = "NULL";
+			}
+		}
+		villagerArray[actiV].dCount = 0;
+		villagerArray[actiV].Location = theTown;
+		villagerArray[actiV].SetParentF(&mother);
+		villagerArray[actiV].SetParentM(&father);
+		for (int i = 0; i <= 4; i++)
+		{
+			villagerArray[actiV].Friends[i] = NULL;
+		}
+		villagerArray[actiV].Partner = NULL;
 
-	//Kids inherit their parent's shared traits
-	if (mother.mbEI && father.mbEI)
-	{
-		villagerArray[actiV].mbEI = true;//
-	}
-	else if (!mother.mbEI && !father.mbEI)
-	{
-		villagerArray[actiV].mbEI = false;//
-	}
-	else
-	{
-		villagerArray[actiV].mbEI = (rand() % 2 == 0);
-	}
+		//Kids inherit their parent's shared traits
+		if (mother.mbEI && father.mbEI)
+		{
+			villagerArray[actiV].mbEI = true;//
+		}
+		else if (!mother.mbEI && !father.mbEI)
+		{
+			villagerArray[actiV].mbEI = false;//
+		}
+		else
+		{
+			villagerArray[actiV].mbEI = (rand() % 2 == 0);
+		}
 
-	if (mother.mbSN && father.mbSN)
-	{
-		villagerArray[actiV].mbSN = true;//
-	}
-	else if (!mother.mbSN && !father.mbSN)
-	{
-		villagerArray[actiV].mbSN = false;//
-	}
-	else
-	{
-		villagerArray[actiV].mbSN = (rand() % 2 == 0);
-	}
+		if (mother.mbSN && father.mbSN)
+		{
+			villagerArray[actiV].mbSN = true;//
+		}
+		else if (!mother.mbSN && !father.mbSN)
+		{
+			villagerArray[actiV].mbSN = false;//
+		}
+		else
+		{
+			villagerArray[actiV].mbSN = (rand() % 2 == 0);
+		}
 
-	if (mother.mbTF && father.mbTF)
-	{
-		villagerArray[actiV].mbTF = true;//
+		if (mother.mbTF && father.mbTF)
+		{
+			villagerArray[actiV].mbTF = true;//
+		}
+		else if (!mother.mbTF && !father.mbTF)
+		{
+			villagerArray[actiV].mbTF = false;//
+		}
+		else
+		{
+			villagerArray[actiV].mbTF = (rand() % 2 == 0);
+		}
+
+		if (mother.mbJP && father.mbJP)
+		{
+			villagerArray[actiV].mbJP = true;//
+		}
+		else if (!mother.mbJP && !father.mbJP)
+		{
+			villagerArray[actiV].mbJP = false;//
+		}
+		else
+		{
+			villagerArray[actiV].mbJP = (rand() % 2 == 0);
+		}
+
+
+		villagerArray[actiV].Head = Villager::Wound::FINE;
+		villagerArray[actiV].Torso = Villager::Wound::FINE;
+		villagerArray[actiV].ArmL = Villager::Wound::FINE;
+		villagerArray[actiV].ArmR = Villager::Wound::FINE;
+		villagerArray[actiV].LegL = Villager::Wound::FINE;
+		villagerArray[actiV].LegR = Villager::Wound::FINE;
+
+		villagerArray[actiV].Job = Villager::Role::CHILD;//
+
+		villagerArray[actiV].deathRisk = 0;
+
+		std::cout << father.Forename << " and " << mother.Forename << " " << father.Surname << " have given birth to a baby ";
+		if (villagerArray[actiV].Male)
+		{
+			std::cout << "boy named " << villagerArray[actiV].Forename << std::endl;
+		}
+		else
+		{
+			std::cout << "girl named " << villagerArray[actiV].Forename << std::endl;
+		}
+
+		father.KidCount++;
+		mother.KidCount++;
+
+		father.Kid[father.KidCount] = &villagerArray[actiV];
+		mother.Kid[mother.KidCount] = &villagerArray[actiV];
+
+		activeVillagersRef++;
 	}
-	else if (!mother.mbTF && !father.mbTF)
-	{
-		villagerArray[actiV].mbTF = false;//
-	}
-	else
-	{
-		villagerArray[actiV].mbTF = (rand() % 2 == 0);
-	}
-
-	if (mother.mbJP && father.mbJP)
-	{
-		villagerArray[actiV].mbJP = true;//
-	}
-	else if (!mother.mbJP && !father.mbJP)
-	{
-		villagerArray[actiV].mbJP = false;//
-	}
-	else
-	{
-		villagerArray[actiV].mbJP = (rand() % 2 == 0);
-	}
-
-
-	villagerArray[actiV].Head = Villager::Wound::FINE;
-	villagerArray[actiV].Torso = Villager::Wound::FINE;
-	villagerArray[actiV].ArmL = Villager::Wound::FINE;
-	villagerArray[actiV].ArmR = Villager::Wound::FINE;
-	villagerArray[actiV].LegL = Villager::Wound::FINE;
-	villagerArray[actiV].LegR = Villager::Wound::FINE;
-
-	villagerArray[actiV].Job = Villager::Role::CHILD;//
-
-	villagerArray[actiV].deathRisk = 0;
-
-	std::cout << father.Forename << " and " << mother.Forename << " " << father.Surname << " have given birth to a baby ";
-	if (villagerArray[actiV].Male)
-	{
-		std::cout << "boy named " << villagerArray[actiV].Forename << std::endl;
-	}
-	else
-	{
-		std::cout << "girl named " << villagerArray[actiV].Forename << std::endl;
-	}
-
-	father.KidCount++;
-	mother.KidCount++;
-
-	father.Kid[father.KidCount] = &villagerArray[actiV];
-	mother.Kid[mother.KidCount] = &villagerArray[actiV];
-
-	activeVillagersRef++;
 }
 
 void Villager::GrowUp(Villager(villagerArray)[3000], int activeRef)
