@@ -623,7 +623,7 @@ void Villager::SeekPartner(Villager(&villagerArray1)[3000], int population1, Vil
 							mbSimilarity++;
 						}
 
-						if (mbSimilarity > 1)
+						if (mbSimilarity > 2)
 						{
 							Partner = &villagerArray1[i];
 							villagerArray1[i].Partner = &activeVillager1;
@@ -641,6 +641,69 @@ void Villager::SeekPartner(Villager(&villagerArray1)[3000], int population1, Vil
 						}
 					}
 				}
+			}
+		}
+	}
+}
+
+void Villager::SeekFriend(Villager(&villagerArray1)[3000], int population1, Villager &activeVillager1)
+{
+	int currentCandidate = 0;
+	int emergencyExit = 0;
+	int mbSimilarity = 0;
+
+	while ((!villagerArray1[currentCandidate].Alive || villagerArray1[currentCandidate].FriendCount > 3) && emergencyExit < 100)
+	{
+		currentCandidate = rand() % population1;
+		emergencyExit++;
+	}
+
+	if (villagerArray1[currentCandidate].Alive && (Age - villagerArray1[currentCandidate].Age < 10) || (villagerArray1[currentCandidate].Age - Age < 10) && villagerArray1[currentCandidate].FriendCount < 4)
+	{
+		mbSimilarity = 0;
+
+		if (mbEI == villagerArray1[currentCandidate].mbEI)
+		{
+			mbSimilarity++;
+		}
+
+		if (mbSN == villagerArray1[currentCandidate].mbSN)
+		{
+			mbSimilarity++;
+		}
+
+		if (mbTF == villagerArray1[currentCandidate].mbTF)
+		{
+			mbSimilarity++;
+		}
+
+		if (mbJP == villagerArray1[currentCandidate].mbJP)
+		{
+			mbSimilarity++;
+		}
+
+		bool existingFriend = false;
+
+		for (int j = 0; j < FriendCount; j++)
+		{
+			if (villagerArray1[currentCandidate].idNumber == Friends[j]->idNumber)
+				existingFriend = true;
+		}
+
+		if (villagerArray1[currentCandidate].idNumber != idNumber && !existingFriend)
+		{
+			if (mbSimilarity > 1)
+			{
+				Friends[FriendCount] = &villagerArray1[currentCandidate];
+				FriendCount++;
+				villagerArray1[currentCandidate].Friends[villagerArray1[currentCandidate].FriendCount] = &activeVillager1;
+				villagerArray1[currentCandidate].FriendCount++;
+
+				std::cout << " " << Forename << " " << Surname << " befriended " << villagerArray1[currentCandidate].Forename << " " << villagerArray1[currentCandidate].Surname << "\n";
+			}
+			else
+			{
+				std::cout << " " << Forename << " " << Surname << " found that they didn't work with " << villagerArray1[currentCandidate].Forename << " " << villagerArray1[currentCandidate].Surname << "\n";
 			}
 		}
 	}
@@ -709,6 +772,7 @@ void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villa
 			villagerArray[actiV].Kid[i] = NULL;
 		}
 		villagerArray[actiV].KidCount = 0;
+		villagerArray[actiV].activeDialogue = 0;
 		for (int i = 0; i < 5; i++)
 		{
 			for (int k = 0; i < 2; i++)
@@ -866,6 +930,61 @@ void Villager::GrowUp(Villager(villagerArray)[3000], int activeRef)
 	{
 		Job = Villager::Role::FARMER;
 	}
+
+	activeDialogue = 0;
+
+	std::string jobQ, jobA, roleText;
+
+	switch (Job)
+	{
+	case Villager::Role::HUNTER:
+		roleText = "n Hunter";
+		break;
+
+	case Villager::Role::FARMER:
+		roleText = " Farmer";
+		break;
+
+	case Villager::Role::HOUSEWIFE:
+		roleText = "n Housewife";
+		break;
+
+	case Villager::Role::SMITH:
+		roleText = " Blacksmith";
+		break;
+
+	case Villager::Role::SOLDIER:
+		roleText = " Soldier";
+		break;
+
+	case Villager::Role::WEAVER:
+		roleText = " Weaver";
+		break;
+	}
+
+	jobQ = "What did you do when you turned 16?";
+	jobA = "I became a" + roleText + " once I became an adult.";
+
+	addDialogue(jobQ, jobA);
+
+	for (int i = 1; i < 5; i++)
+	{
+		for (int k = 0; i < 2; i++)
+		{
+			dialogue[i][k] = "NULL";
+		}
+	}
+}
+
+void Villager::addDialogue(std::string Q, std::string A)
+{
+	dialogue[activeDialogue][0] = Q;
+	dialogue[activeDialogue][1] = A;
+
+	if (activeDialogue > 4)
+		activeDialogue = 0;
+	else
+		activeDialogue++;
 }
 
 //run each potential yearly activity for a villager, as well as incrementing yearly values
@@ -886,6 +1005,11 @@ void Villager::SimulateYear(Villager(&villagerArray)[3000], int population, Vill
 		if ((Partner == nullptr) && (Age > 17))
 		{
 			SeekPartner(villagerArray, population, activeVillager);
+		}
+
+		if (FriendCount < ((Age / 5) + 1) && FriendCount < 4)
+		{
+			SeekFriend(villagerArray, population, activeVillager);
 		}
 
 		if (isPregnant)
@@ -990,7 +1114,9 @@ void Villager::OutputData()
 			//loop for number of friends to display their names
 			for (int i = 0; i < FriendCount; i++)
 			{
-				std::cout << "\n" << Friends;
+				if (Friends[i] != NULL)
+					std::cout << "\n >" << Friends[i]->Forename;
+				
 			}
 		}
 

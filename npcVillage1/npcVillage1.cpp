@@ -468,6 +468,7 @@ void firstGeneration(int gen1, string homeTown)
 		villager[0].Kid[i] = NULL;
 	}
 	villager[0].KidCount = 0;
+	villager[0].activeDialogue = 1;
 	villager[0].dialogue[0][0] = "What have the Gods ever done for us?";
 	villager[0].dialogue[0][1] = "Created the universe in a time before memory";
 	for (int i = 1; i < 5; i++)
@@ -532,6 +533,7 @@ void firstGeneration(int gen1, string homeTown)
 			villager[j].Kid[i] = NULL;
 		}
 		villager[j].KidCount = 0;
+		villager[j].activeDialogue = 0;
 		for (int i = 0; i < 5; i++)
 		{
 			for (int k = 0; i < 2; i++)
