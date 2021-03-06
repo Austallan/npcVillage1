@@ -1,6 +1,7 @@
 #include "Villager.h"
 #include <iostream>
 
+
 //FUNCTIONS DOWN HERE												FUNCTIONS DOWN HERE
 //VVVVVVVVVVVVVVVVVVV												VVVVVVVVVVVVVVVVVVV
 std::string Villager::ReturnParent(Villager* PartnerPtr)
@@ -27,7 +28,16 @@ void Villager::SetParentF(Villager* newParentF)
 
 void Villager::ScarVillager(Villager &activeVillagerX)
 {
+	bool record = false;
 	int randNum = 0;
+	std::string tempQ, tempA;
+
+	if (rand() % 5 < 1)
+	{
+		record = true;
+		tempQ = "What happened to your ";
+		tempA = "I scarred my ";
+	}
 
 	randNum = rand() % 5;
 
@@ -40,6 +50,16 @@ void Villager::ScarVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.ArmL = SCARRED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their left arm\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "left arm?";
+				tempA = "left arm when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -48,6 +68,16 @@ void Villager::ScarVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.ArmR = SCARRED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their right arm\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "right arm?";
+				tempA = "right arm when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -56,6 +86,16 @@ void Villager::ScarVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.LegL = SCARRED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their left leg\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "left leg?";
+				tempA = "left leg when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -64,6 +104,16 @@ void Villager::ScarVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.LegR = SCARRED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their right leg\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "right leg?";
+				tempA = "right leg when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -72,6 +122,16 @@ void Villager::ScarVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.Torso = SCARRED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their torso\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "torso?";
+				tempA = "torso when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -80,6 +140,16 @@ void Villager::ScarVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.Head = SCARRED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " scarred their head\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "head?";
+				tempA = "head when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 	}
@@ -87,7 +157,16 @@ void Villager::ScarVillager(Villager &activeVillagerX)
 
 void Villager::BurnVillager(Villager &activeVillagerX)
 {
+	bool record = false;
 	int randNum = 0;
+	std::string tempQ, tempA;
+
+	if (rand() % 5 < 1)
+	{
+		record = true;
+		tempQ = "What happened to your ";
+		tempA = "I burned my ";
+	}
 
 	randNum = rand() % 5;
 
@@ -100,6 +179,16 @@ void Villager::BurnVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.ArmL = BURNED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their left arm\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "left arm?";
+				tempA = "left arm when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -108,6 +197,16 @@ void Villager::BurnVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.ArmR = BURNED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their right arm\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "right arm?";
+				tempA = "right arm when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -116,6 +215,16 @@ void Villager::BurnVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.LegL = BURNED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their left leg\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "left leg?";
+				tempA = "left leg when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -124,6 +233,16 @@ void Villager::BurnVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.LegR = BURNED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their right leg\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "right leg?";
+				tempA = "right leg when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -132,6 +251,16 @@ void Villager::BurnVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.Torso = BURNED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their torso\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "torso?";
+				tempA = "torso when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -140,6 +269,16 @@ void Villager::BurnVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.Head = BURNED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " burned their head\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "head?";
+				tempA = "head when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 	}
@@ -147,7 +286,16 @@ void Villager::BurnVillager(Villager &activeVillagerX)
 
 void Villager::CrippleVillager(Villager &activeVillagerX)
 {
+	bool record = false;
 	int randNum = 0;
+	std::string tempQ, tempA;
+
+	if (rand() % 5 < 1)
+	{
+		record = true;
+		tempQ = "What happened to your ";
+		tempA = "I crippled my ";
+	}
 
 	randNum = rand() % 5;
 
@@ -160,6 +308,16 @@ void Villager::CrippleVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.ArmL = CRIPPLED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their left arm\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "left arm?";
+				tempA = "left arm when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -168,6 +326,16 @@ void Villager::CrippleVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.ArmR = CRIPPLED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their right arm\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "right arm?";
+				tempA = "right arm when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -176,6 +344,16 @@ void Villager::CrippleVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.LegL = CRIPPLED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their left leg\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "left leg?";
+				tempA = "left leg when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -184,6 +362,16 @@ void Villager::CrippleVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.LegR = CRIPPLED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their right leg\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "right leg?";
+				tempA = "right leg when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -192,6 +380,16 @@ void Villager::CrippleVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.Torso = CRIPPLED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their torso\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "torso?";
+				tempA = "torso when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -200,6 +398,16 @@ void Villager::CrippleVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.Head = CRIPPLED;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " crippled their head\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "head?";
+				tempA = "head when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 	}
@@ -207,7 +415,16 @@ void Villager::CrippleVillager(Villager &activeVillagerX)
 
 void Villager::SeverVillager(Villager &activeVillagerX)
 {
+	bool record = false;
 	int randNum = 0;
+	std::string tempQ, tempA;
+
+	if (rand() % 5 < 1)
+	{
+		record = true;
+		tempQ = "What happened to your ";
+		tempA = "I lost my ";
+	}
 
 	randNum = rand() % 5;
 
@@ -220,6 +437,16 @@ void Villager::SeverVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.ArmL = MISSING;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their left arm\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "left arm?";
+				tempA = "left arm when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -228,6 +455,16 @@ void Villager::SeverVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.ArmR = MISSING;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their right arm\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "right arm?";
+				tempA = "right arm when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -236,6 +473,16 @@ void Villager::SeverVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.LegL = MISSING;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their left leg\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "left leg?";
+				tempA = "left leg when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -244,6 +491,16 @@ void Villager::SeverVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.LegR = MISSING;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their left leg\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "right leg?";
+				tempA = "right leg when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -252,6 +509,16 @@ void Villager::SeverVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.Torso = MISSING;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their torso\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "torso?";
+				tempA = "torso when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 
@@ -260,6 +527,16 @@ void Villager::SeverVillager(Villager &activeVillagerX)
 		{
 			activeVillagerX.Head = MISSING;
 			std::cout << activeVillagerX.Forename << " " << activeVillagerX.Surname << " lost their head\n";
+
+			if (record)
+			{
+				addDialogue(tempQ, tempA);
+
+				tempQ = "head?";
+				tempA = "head when I was " + std::to_string(Age);
+
+				editDialogue("", tempQ, "", tempA);
+			}
 		}
 		break;
 	}
@@ -597,7 +874,7 @@ void Villager::SeekPartner(Villager(&villagerArray1)[3000], int population1, Vil
 		{
 			if ((Male != villagerArray1[i].Male) && (villagerArray1[i].Partner == nullptr))
 			{
-				if ((Age - villagerArray1[i].Age < 10) || (villagerArray1[i].Age - Age < 10))
+				if ((std::abs(Age - villagerArray1[i].Age) < 10) && villagerArray1[i].Age > 17)
 				{
 					if (villagerArray1[i].Male == false)
 					{
@@ -637,6 +914,16 @@ void Villager::SeekPartner(Villager(&villagerArray1)[3000], int population1, Vil
 							else
 							{
 								Surname = villagerArray1[i].Surname;
+							}
+
+							if (rand() % 5 < 1)
+							{
+								std::string tempQ, tempA;
+
+								tempQ = "How old were you when you married " + villagerArray1[i].Forename + "?";
+								tempA = "I married " + villagerArray1[i].Forename + " when I was " + std::to_string(Age) + " and they were " + std::to_string(Partner->Age);
+
+								addDialogue(tempQ, tempA);
 							}
 						}
 					}
@@ -700,10 +987,30 @@ void Villager::SeekFriend(Villager(&villagerArray1)[3000], int population1, Vill
 				villagerArray1[currentCandidate].FriendCount++;
 
 				std::cout << " " << Forename << " " << Surname << " befriended " << villagerArray1[currentCandidate].Forename << " " << villagerArray1[currentCandidate].Surname << "\n";
+
+				if (rand() % 5 < 1)
+				{
+					std::string tempQ, tempA;
+
+					tempQ = "How long have you been friends with " + villagerArray1[currentCandidate].Forename + "?";
+					tempA = "I've been friends with " + villagerArray1[currentCandidate].Forename + " since I was " + std::to_string(Age);
+
+					addDialogue(tempQ, tempA);
+				}
 			}
 			else
 			{
 				std::cout << " " << Forename << " " << Surname << " found that they didn't work with " << villagerArray1[currentCandidate].Forename << " " << villagerArray1[currentCandidate].Surname << "\n";
+
+				if (rand() % 5 < 1)
+				{
+					std::string tempQ, tempA;
+
+					tempQ = "Do you get along well with " + villagerArray1[currentCandidate].Forename + "?";
+					tempA = "I talked to " + villagerArray1[currentCandidate].Forename + " when I was " + std::to_string(Age) + " but we didn't work as friends";
+
+					addDialogue(tempQ, tempA);
+				}
 			}
 		}
 	}
@@ -777,7 +1084,7 @@ void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villa
 		{
 			for (int k = 0; i < 2; i++)
 			{
-				villagerArray[actiV].dialogue[i][k] = "NULL";
+				villagerArray[actiV].dialogue[i][k] = "";
 			}
 		}
 		villagerArray[actiV].dCount = 0;
@@ -870,6 +1177,22 @@ void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villa
 
 		father.Kid[father.KidCount] = &villagerArray[actiV];
 		mother.Kid[mother.KidCount] = &villagerArray[actiV];
+
+		if (rand() % 5 < 1)
+		{
+			std::string tempStringQ;
+			std::string tempStringA;
+				
+			tempStringQ = "When were you born?";
+			tempStringA = "I was born in the year " + std::to_string(currentYear);
+
+			std::cout << currentYear << std::endl;
+			std::cout << tempStringQ << std::endl;
+			std::cout << tempStringA << std::endl;
+
+			villagerArray[actiV].addDialogue(tempStringQ, tempStringA);
+			std::cout << villagerArray[actiV].dialogue[0][0] << std::endl << villagerArray[actiV].dialogue[0][1];
+		}
 
 		activeVillagersRef++;
 	}
@@ -966,25 +1289,44 @@ void Villager::GrowUp(Villager(villagerArray)[3000], int activeRef)
 	jobA = "I became a" + roleText + " once I became an adult.";
 
 	addDialogue(jobQ, jobA);
-
-	for (int i = 1; i < 5; i++)
-	{
-		for (int k = 0; i < 2; i++)
-		{
-			dialogue[i][k] = "NULL";
-		}
-	}
 }
 
-void Villager::addDialogue(std::string Q, std::string A)
+void Villager::addDialogue(std::string Q, std::string A) //adds new Q's and A's, replacing old ones
 {
 	dialogue[activeDialogue][0] = Q;
 	dialogue[activeDialogue][1] = A;
 
-	if (activeDialogue > 4)
+	if (activeDialogue > 3)
+	{
 		activeDialogue = 0;
+		dCount++;
+	}
+
 	else
 		activeDialogue++;
+}
+
+void Villager::editDialogue(std::string Qprefix, std::string Qsuffix, std::string Aprefix, std::string Asuffix) //DANGEROUS ><><>< Can edit the last edited dialogue
+{
+	std::string Qexisting;// = dialogue[activeDialogue][0];
+	std::string Aexisting;// = dialogue[activeDialogue][1];
+
+	if (activeDialogue == 0)
+	{
+		Qexisting = dialogue[4][0];
+		Aexisting = dialogue[4][1];
+
+		dialogue[4][0] = Qprefix + Qexisting + Qsuffix;
+		dialogue[4][1] = Aprefix + Aexisting + Asuffix;
+	}
+	else
+	{
+		Qexisting = dialogue[activeDialogue - 1][0];
+		Aexisting = dialogue[activeDialogue - 1][1];
+
+		dialogue[activeDialogue - 1][0] = Qprefix + Qexisting + Qsuffix;
+		dialogue[activeDialogue - 1][1] = Aprefix + Aexisting + Asuffix;
+	}
 }
 
 //run each potential yearly activity for a villager, as well as incrementing yearly values
@@ -1119,6 +1461,9 @@ void Villager::OutputData()
 				
 			}
 		}
+
+	//times they've looped over dialogue
+		std::cout << "\n D-Count: " << dCount;
 
 	//Myers-Briggs type
 		std::cout << "\n Myers-Briggs Type: ";

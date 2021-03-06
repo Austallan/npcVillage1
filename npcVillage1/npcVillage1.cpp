@@ -24,11 +24,6 @@ int FemaleNameCount = 0;
 string SurnamesArray[2089];//2088
 int SurnamesCount = 0;
 
-bool RandBool()
-{
-	return rand() % 2 == 0;
-}
-
 void feasabilityDemoPeople()
 {
     //Baby steps, let's create the base villager to act as "Parents" to the first generation
@@ -475,7 +470,7 @@ void firstGeneration(int gen1, string homeTown)
 	{
 		for (int k = 0; i < 2; i++)
 		{
-			villager[0].dialogue[i][k] = "NULL";
+			villager[0].dialogue[i][k] = "";
 		}
 	}
 	villager[0].dCount = 0;
@@ -538,7 +533,7 @@ void firstGeneration(int gen1, string homeTown)
 		{
 			for (int k = 0; i < 2; i++)
 			{
-				villager[j].dialogue[i][k] = "NULL";
+				villager[j].dialogue[i][k] = "";
 			}
 		}
 		villager[j].dCount = 0;

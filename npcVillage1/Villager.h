@@ -22,6 +22,7 @@ public:
 	void HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villager &father, std::string(foreNamesM)[241], int foreMLength, std::string(foreNamesF)[328], int foreFLength, std::string theTown, int& activeVillagersRef, int currentYear);
 	void GrowUp(Villager(villagerArray)[3000], int activeRef);
 	void addDialogue(std::string Q, std::string A);
+	void editDialogue(std::string Qprefix, std::string Qsuffix, std::string Aprefix, std::string Asuffix);
 
 	int idNumber;//will help with identification at output
 	
