@@ -1293,17 +1293,28 @@ void Villager::GrowUp(Villager(villagerArray)[3000], int activeRef)
 
 void Villager::addDialogue(std::string Q, std::string A) //adds new Q's and A's, replacing old ones
 {
-	dialogue[activeDialogue][0] = Q;
-	dialogue[activeDialogue][1] = A;
+	bool notDupe = true;
 
-	if (activeDialogue > 3)
+	for (int i = 0; i < 5; i++)
 	{
-		activeDialogue = 0;
-		dCount++;
+		if (A == dialogue[i][1])
+			notDupe = false;
 	}
 
-	else
-		activeDialogue++;
+	if (notDupe)
+	{
+		dialogue[activeDialogue][0] = Q;
+		dialogue[activeDialogue][1] = A;
+
+		if (activeDialogue > 3)
+		{
+			activeDialogue = 0;
+			dCount++;
+		}
+
+		else
+			activeDialogue++;
+	}
 }
 
 void Villager::editDialogue(std::string Qprefix, std::string Qsuffix, std::string Aprefix, std::string Asuffix) //DANGEROUS ><><>< Can edit the last edited dialogue
@@ -1349,7 +1360,7 @@ void Villager::SimulateYear(Villager(&villagerArray)[3000], int population, Vill
 			SeekPartner(villagerArray, population, activeVillager);
 		}
 
-		if (FriendCount < ((Age / 5) + 1) && FriendCount < 4)
+		if (FriendCount < ((Age / 5) + 1) && FriendCount < (sizeof(Friends)/sizeof(Friends[0]) -1))
 		{
 			SeekFriend(villagerArray, population, activeVillager);
 		}
@@ -1367,6 +1378,211 @@ void Villager::SimulateYear(Villager(&villagerArray)[3000], int population, Vill
 		}
 
 		NaturalCausesDeath(); //do this last to account for and deathRisk gained in the year
+	}
+}
+
+//Fill in any empty dialogue
+void Villager::fillDialogue(int &dialogueOption)
+{
+	while (dCount < 1)
+	{
+		std::string tempQ, tempA;
+
+		switch (dialogueOption)
+		{
+		case(0):
+			tempQ = "Who were your parents?";
+			tempA = "My mother was " + ParentF->Forename + " and my father was " + ParentM->Forename;
+
+			addDialogue(tempQ, tempA);
+			dialogueOption++;
+			break;
+
+		case(1):
+			tempQ = "How many friends do you have?";
+			if (FriendCount > 2)
+				tempA = "I have " + std::to_string(FriendCount) + " friends";
+			else if (FriendCount == 1)
+				tempA = "I only have the one friend, " + Friends[0]->Forename;
+			else
+				tempA = "I don't have any friends";
+
+			addDialogue(tempQ, tempA);
+			dialogueOption++;
+			break;
+
+		case(2):
+			tempQ = "Do you have any siblings?";
+
+			if (ParentF->KidCount > 2)
+				tempA = "Yes, I actually have " + std::to_string((ParentF->KidCount - 1)) + " siblings";
+			else if (ParentF->KidCount == 2)
+				tempA = "Yes, but I only have one sibling";
+			else
+				tempA = "No, I'm an only child";
+
+			addDialogue(tempQ, tempA);
+			dialogueOption++;
+			break;
+
+		case(3):
+			tempQ = "How old was your father when he died?";
+
+			if (!ParentM->Alive)
+				tempA = "My father was " + std::to_string(ParentM->Age) + " when he died";
+			else
+				tempA = "My father is actually still alive";
+				
+			addDialogue(tempQ, tempA);
+			dialogueOption++;
+			break;
+
+		case(4):
+			tempQ = "Who was your first friend?";
+
+			if (Friends[0] == NULL)
+				tempA = "I actually don't have any friends yet";
+			else
+				tempA = "My first friend was " + Friends[0]->Forename + " " + Friends[0]->Surname;
+
+			addDialogue(tempQ, tempA);
+			dialogueOption++;
+			break;
+
+		case(5):
+
+			if (ParentF->KidCount > 1)
+			{
+				tempQ = "What is your eldest sibling's age?";
+
+				if (ParentF->Kid[1]->idNumber == idNumber)
+					tempA = "I'm the eldest sibling, but the next eldest is " + ParentF->Kid[2]->Forename + " who was born " + std::to_string(std::abs(ParentF->Kid[2]->BirthYear - BirthYear)) + " years after me";
+				else
+					tempA = "My eldest sibling is " + ParentF->Kid[1]->Forename + " who was born " + std::to_string(ParentF->Kid[1]->Age) + " years old";
+			}
+			else
+			{
+				tempQ = "Do you have any injuries to your head?";
+
+				if (Head == FINE)
+					tempA = "I've never had any serious injuries to my head";
+				else
+					switch (Head)
+					{
+					case(SCARRED):
+						tempA = "Yeah I managed to scar my head";
+						break;
+
+					case(BURNED):
+						tempA = "Yeah I managed to burn my head";
+						break;
+
+					case(CRIPPLED):
+						tempA = "Yeah I managed to cripple my head and died from my injuries";
+						break;
+
+					case(MISSING):
+						tempA = "Yeah I managed to lose my head and died from my injuries";
+						break;
+					}
+			}
+
+			addDialogue(tempQ, tempA);
+			dialogueOption++;
+			break;
+
+		case(6):
+			tempQ = "How old was your mother when she died?";
+
+			if (!ParentF->Alive)
+				tempA = "My mother was " + std::to_string(ParentF->Age) + " when she died";
+			else
+				tempA = "My mother is actually still alive";
+
+			addDialogue(tempQ, tempA);
+			dialogueOption++;
+			break;
+
+		case(7):
+			tempQ = "Do you have any children?";
+
+			if (KidCount > 1)
+				tempA = "I have " + std::to_string(KidCount) + " wonderful children!";
+			else if (KidCount == 1)
+				tempA = "I just have the one child";
+			else if (KidCount == 0)
+				tempA = "I don't have any children";
+
+			if (Age < 18)
+				tempA = "I'm a little young to be having children don't you think?";
+
+			addDialogue(tempQ, tempA);
+			dialogueOption++;
+			break;
+
+		case(8):
+			if (ParentF->BirthYear > 0)
+			{
+				tempQ = "How old was your mother when she had you?";
+
+				tempA = "My mother was " + std::to_string(BirthYear - ParentF->BirthYear) + " years old when she had me";
+			}
+			else
+			{
+				tempQ = "Would you say you're more of an introvert or an extrovert?";
+
+				tempA = "I think I'm more of an ";
+				if (mbEI)
+					tempA = tempA + "extrovert";
+				else
+					tempA = tempA + "introvert";
+			}
+			addDialogue(tempQ, tempA);
+			dialogueOption++;
+			break;
+
+		case(9):
+			if (FriendCount > 0)
+			{
+				tempQ = "Do you have any shared friends with " + Friends[0]->Forename + " " + Friends[0]->Surname + "?";
+
+				Villager *sharedFriend = nullptr;
+				int sharedFnum = 0;
+
+				for (int i = 0; i < FriendCount; i++)
+				{
+					for (int j = 0; j < Friends[0]->FriendCount; j++)
+					{
+						if (Friends[0]->Friends[j]->idNumber == Friends[i]->idNumber)
+						{
+							sharedFnum++;
+							sharedFriend = Friends[i];
+						}
+					}
+				}
+
+				if (sharedFnum > 1)
+					tempA = "Yes, we have " + std::to_string(sharedFnum) + " friends shared, including " + sharedFriend->Forename + " " + sharedFriend->Surname;
+				else if (sharedFnum == 1)
+					tempA = "Yes, we have 1 shared friend, " + sharedFriend->Forename + " " + sharedFriend->Surname;
+				else
+					tempA = "No, " + Friends[0]->Forename + " and I don't share any friends";
+			}
+			else
+			{
+				tempQ = "Would people say you were more logical or more empathetic?";
+
+				tempA = "I think people would say I make decisions based on ";
+				if (mbTF)
+					tempA = tempA + "the facts at hand";
+				else
+					tempA = tempA + "how I feel about something";
+			}
+
+			addDialogue(tempQ, tempA);
+			dialogueOption = 0;
+			break;
+		}
 	}
 }
 

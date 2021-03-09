@@ -753,6 +753,14 @@ int main()
 		Year++;
 	}
 
+	int dFill = 0;
+
+	//has to be seperate so as to not break due to Fimbultyr
+	for (int i = 1; i < ActiveVillagers; i++)
+	{
+		villager[i].fillDialogue(dFill);
+	}
+
     //gimme that sweet output
     for (int i = 0; i < ActiveVillagers; i++)
     {

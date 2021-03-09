@@ -23,6 +23,7 @@ public:
 	void GrowUp(Villager(villagerArray)[3000], int activeRef);
 	void addDialogue(std::string Q, std::string A);
 	void editDialogue(std::string Qprefix, std::string Qsuffix, std::string Aprefix, std::string Asuffix);
+	void fillDialogue(int &dialogueOption);
 
 	int idNumber;//will help with identification at output
 	
@@ -41,15 +42,15 @@ public:
 
 	int FriendCount;
 
-	Villager *Kid[6];      //REMEMBER TO SET THE ARRAY UP FOR MAX KIDS LATER
+	Villager *Kid[6];      //Slot 0 is always left empty, please ignore that I was very tired when I did it and can't remember if there was a good reason or not
 
 	int KidCount;
 
-	int activeDialogue;
+	int activeDialogue; //The dialogue to be edited next
 
 	std::string dialogue[5][2];
 
-	int dCount;
+	int dCount; //how many times (if any) that all 5 dialogues have been looped over
 
 	std::string Location;
 
@@ -57,9 +58,9 @@ public:
 
 	Villager *ParentM;//Male Parent
 
-	Villager *Friends[4];   //SAME BUT FOR FRIENDS, NOT AS IMPORTANT THO VVVVV
+	Villager *Friends[4];   
 
-	Villager *Partner;		//All of these need to be pointers to instances of the class
+	Villager *Partner;		
 	
 	//Myers-Briggs stuff (first letter if true)
 	bool mbEI;
