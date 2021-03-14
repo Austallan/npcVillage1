@@ -5,7 +5,6 @@
 #include "OtherTown.h"
 #include <fstream>
 #include <iostream>
-#include <string>
 #include <ctime>
 
 using namespace std;
@@ -636,6 +635,7 @@ int main()
     int MaxVillagers = 10;
 	int StartVillagers = 10;
 	int seed = 3000;
+	bool aliveOnly = false;
 
 	std::cout << "<<<<	LOADING VILLAGER NAMES	>>>>\n";
 
@@ -727,15 +727,39 @@ int main()
 		std::cin >> seed;
 	}
 
+	char filterState;
+	//Select if the user wants all data output or only alive villagers
+	std::cout << "\n Do you wish to filter out dead villagers?\n Y for filter, N for all\n";
+	std::cin >> filterState;
+	filterState = toupper(filterState);
+
+	while ((filterState != 'Y') && (filterState != 'N'))
+	{
+		std::cout << "Input invalid, please enter either Y or N\n";
+		std::cin >> filterState;
+		filterState = toupper(filterState);
+	}
+
+	if (filterState == 'Y')
+	{
+		aliveOnly = true;
+		std::cout << "aliveout is false\n";
+	}
+	else if (filterState == 'N')
+	{
+		aliveOnly = false;
+		std::cout << "aliveout is false\n";
+	}
+	else
+		std::cout << "THIS IS BROKEN\n";
+
 	OtherTown town1("East", 10);
 	OtherTown town2("West", 10);
 
-    //feasabilityDemoPeople(); //for the demo, needs replacing
 	firstGeneration(StartVillagers, villageName);//Generates the first 10-50 villagers (depending on player input)
 
 	//life simulation test
 	int Year = 0;
-	//srand((unsigned)time(0));
 	std::srand(seed);
 
 	//running for 100 years for testing
@@ -761,27 +785,62 @@ int main()
 		villager[i].fillDialogue(dFill);
 	}
 
+	//filename
+	std::string filename = "..\\OutputVillages\\" + std::to_string(StartVillagers) + villageName + std::to_string(seed);
+	if (filterState)
+		filename = filename + "filtered.csv";
+	else
+		filename = filename + "unfiltered.csv";
+
+	ofstream outputFile(filename);
+
+	//outputFile.open(filename);
+
+	outputFile << "ID Number," << "Forename," << "Surname," << "Birth Year," << "Sex," << "Age," << "Mother ID," << "Father ID," << "No. of Kids," << "No. of Friends,"
+		<< "Partner ID," << "MB Type," << "Q1," << "A1," << "Q2," << "A2," << "Q3," << "A3," << "Q4," << "A4," << "Q5," << "A5," << "Job"<< std::endl;
+
     //gimme that sweet output
     for (int i = 0; i < ActiveVillagers; i++)
     {
-        villager[i].OutputData();
+		if (aliveOnly)
+		{
+			if (villager[i].Alive)
+			{
+				villager[i].OutputData();//for the console
+
+				outputFile << villager[i].idNumber << "," << villager[i].Forename << "," << villager[i].Surname << "," << villager[i].BirthYear << ",";
+				outputFile << villager[i].returnMale() << "," << villager[i].Age << "," << villager[i].ReturnParentF() << "," << villager[i].ReturnParentM() << ",";
+				outputFile << villager[i].KidCount << "," << villager[i].FriendCount << "," << villager[i].returnPartnerID() << "," << villager[i].returnMBType() << ",";
+				
+				for (int j = 0; j < 5; j++)
+				{
+					outputFile << villager[i].dialogue[j][0] << "," << villager[i].dialogue[j][1] << ",";
+				}
+
+				outputFile << villager[i].returnRole() << std::endl; 
+			}
+		}
+		else
+		{
+			villager[i].OutputData();//for the console
+
+			outputFile << villager[i].idNumber << "," << villager[i].Forename << "," << villager[i].Surname << "," << villager[i].BirthYear << ",";
+			outputFile << villager[i].returnMale() << "," << villager[i].Age << "," << villager[i].ReturnParentF() << "," << villager[i].ReturnParentM() << ",";
+			outputFile << villager[i].KidCount << "," << villager[i].FriendCount << "," << villager[i].returnPartnerID() << "," << villager[i].returnMBType() << ",";
+
+			for (int j = 0; j < 5; j++)
+			{
+				outputFile << villager[i].dialogue[j][0] << "," << villager[i].dialogue[j][1] << ",";
+			}
+
+			outputFile << villager[i].returnRole() << std::endl;
+		}
     }
+
+	outputFile.close();
 
 	std::cout << "\n Generated using seed: " << seed << endl;
 }
-
-
-void lifeCycle()
-{
-
-}
-
-
-void results()
-{
-
-}
-
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

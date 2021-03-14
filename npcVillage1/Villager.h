@@ -6,6 +6,8 @@ class Villager
 public:
 	void OutputData();
 	std::string ReturnParent(Villager* PartnerPtr);
+	std::string ReturnParentF();
+	std::string ReturnParentM();
 	void SetParentM(Villager* newParentM);
 	void SetParentF(Villager* newParentF);
 
@@ -24,6 +26,11 @@ public:
 	void addDialogue(std::string Q, std::string A);
 	void editDialogue(std::string Qprefix, std::string Qsuffix, std::string Aprefix, std::string Asuffix);
 	void fillDialogue(int &dialogueOption);
+	int liveVillagers(Villager(&villagerArray)[3000], int population);
+	std::string returnMBType();
+	std::string returnRole();
+	std::string returnMale();
+	std::string returnPartnerID();
 
 	int idNumber;//will help with identification at output
 	

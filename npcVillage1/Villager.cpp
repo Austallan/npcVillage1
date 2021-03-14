@@ -1,5 +1,7 @@
 #include "Villager.h"
+#include <fstream>
 #include <iostream>
+#include <string>
 
 
 //FUNCTIONS DOWN HERE												FUNCTIONS DOWN HERE
@@ -11,6 +13,30 @@ std::string Villager::ReturnParent(Villager* PartnerPtr)
 	std::string tempSurname = PartnerPtr->Surname;
 
 	tempHolder = tempForename + " " + tempSurname;
+
+	return tempHolder;
+}
+
+std::string Villager::ReturnParentF()
+{
+	std::string tempHolder;
+
+	if (ParentF != NULL)
+		tempHolder = std::to_string(ParentF->idNumber);
+	else
+		tempHolder = "Eternal";
+
+	return tempHolder;
+}
+
+std::string Villager::ReturnParentM()
+{
+	std::string tempHolder;
+
+	if (ParentM != NULL)
+		tempHolder = std::to_string(ParentM->idNumber);
+	else
+		tempHolder = "Eternal";
 
 	return tempHolder;
 }
@@ -1415,11 +1441,11 @@ void Villager::fillDialogue(int &dialogueOption)
 			tempQ = "Do you have any siblings?";
 
 			if (ParentF->KidCount > 2)
-				tempA = "Yes, I actually have " + std::to_string((ParentF->KidCount - 1)) + " siblings";
+				tempA = "Yes. I actually have " + std::to_string((ParentF->KidCount - 1)) + " siblings";
 			else if (ParentF->KidCount == 2)
-				tempA = "Yes, but I only have one sibling";
+				tempA = "Yes. but I only have one sibling";
 			else
-				tempA = "No, I'm an only child";
+				tempA = "No. I'm an only child";
 
 			addDialogue(tempQ, tempA);
 			dialogueOption++;
@@ -1456,7 +1482,7 @@ void Villager::fillDialogue(int &dialogueOption)
 				tempQ = "What is your eldest sibling's age?";
 
 				if (ParentF->Kid[1]->idNumber == idNumber)
-					tempA = "I'm the eldest sibling, but the next eldest is " + ParentF->Kid[2]->Forename + " who was born " + std::to_string(std::abs(ParentF->Kid[2]->BirthYear - BirthYear)) + " years after me";
+					tempA = "I'm the eldest sibling. The next eldest is " + ParentF->Kid[2]->Forename + " who was born " + std::to_string(std::abs(ParentF->Kid[2]->BirthYear - BirthYear)) + " years after me";
 				else
 					tempA = "My eldest sibling is " + ParentF->Kid[1]->Forename + " who was born " + std::to_string(ParentF->Kid[1]->Age) + " years old";
 			}
@@ -1562,11 +1588,11 @@ void Villager::fillDialogue(int &dialogueOption)
 				}
 
 				if (sharedFnum > 1)
-					tempA = "Yes, we have " + std::to_string(sharedFnum) + " friends shared, including " + sharedFriend->Forename + " " + sharedFriend->Surname;
+					tempA = "Yes. We have " + std::to_string(sharedFnum) + " friends shared, including " + sharedFriend->Forename + " " + sharedFriend->Surname;
 				else if (sharedFnum == 1)
-					tempA = "Yes, we have 1 shared friend, " + sharedFriend->Forename + " " + sharedFriend->Surname;
+					tempA = "Yes. We have 1 shared friend, " + sharedFriend->Forename + " " + sharedFriend->Surname;
 				else
-					tempA = "No, " + Friends[0]->Forename + " and I don't share any friends";
+					tempA = "No. " + Friends[0]->Forename + " and I don't share any friends";
 			}
 			else
 			{
@@ -1584,6 +1610,108 @@ void Villager::fillDialogue(int &dialogueOption)
 			break;
 		}
 	}
+}
+
+int liveVillagers(Villager(&villagerArray)[3000], int population)
+{
+	int livingVillagers = 0;
+
+	for (int i = 0; i < population; i++)
+	{
+		if (villagerArray[i].Alive)
+			livingVillagers++;
+	}
+
+	return livingVillagers;
+}
+
+std::string Villager::returnMBType()
+{
+	std::string mbType;
+
+	if (mbEI)
+		mbType = "E";
+	else
+		mbType = "I";
+
+	if (mbSN)
+		mbType = mbType + "S";
+	else
+		mbType = mbType + "N";
+
+	if (mbTF)
+		mbType = mbType + "T";
+	else
+		mbType = mbType + "F";
+
+	if (mbJP)
+		mbType = mbType + "J";
+	else
+		mbType = mbType + "P";
+
+	return mbType;
+}
+
+std::string Villager::returnRole()
+{
+	std::string output = "ERROR";
+
+	switch (Job)
+	{
+	case(DEAD):
+		output = "Dead";
+		break;
+
+	case(FARMER):
+		output = "Farmer";
+		break;
+
+	case(SMITH):
+		output = "Smith";
+		break;
+
+	case(HUNTER):
+		output = "Hunter";
+		break;
+
+	case(HOUSEWIFE):
+		output = "Housewife";
+		break;
+
+	case(WEAVER):
+		output = "Weaver";
+		break;
+
+	case(SOLDIER):
+		output = "Soldier";
+		break;
+
+	case(CHILD):
+		output = "Child";
+		break;
+	}
+
+	return output;
+}
+
+std::string Villager::returnMale()
+{
+	if (Male)
+		return "Male";
+	else
+		return "Female";
+}
+
+std::string Villager::returnPartnerID()
+{
+	std::string returnValue;
+
+	if (Partner != nullptr)
+		returnValue = std::to_string(Partner->idNumber);
+	else
+		returnValue = "Single";
+
+	return returnValue;
 }
 
 //Print all the data for all villagers to the console
