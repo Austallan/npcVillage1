@@ -38,6 +38,8 @@ public:
 
 	int BirthYear;
 
+	int Generation; //FULLY FLESH THIS OUT NERD
+
 	int Age;
 
 	bool Alive;

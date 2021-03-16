@@ -1077,6 +1077,7 @@ void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villa
 			villagerArray[actiV].Male = true;
 		}
 		villagerArray[actiV].BirthYear = currentYear;
+		villagerArray[actiV].Generation = (father.Generation + 1);
 		villagerArray[actiV].Age = 0;
 		villagerArray[actiV].Alive = true;
 		villagerArray[actiV].isPregnant = false;
@@ -1429,7 +1430,7 @@ void Villager::fillDialogue(int &dialogueOption)
 			if (FriendCount > 2)
 				tempA = "I have " + std::to_string(FriendCount) + " friends";
 			else if (FriendCount == 1)
-				tempA = "I only have the one friend, " + Friends[0]->Forename;
+				tempA = Friends[0]->Forename + " is my only real friend.";
 			else
 				tempA = "I don't have any friends";
 
@@ -1484,7 +1485,7 @@ void Villager::fillDialogue(int &dialogueOption)
 				if (ParentF->Kid[1]->idNumber == idNumber)
 					tempA = "I'm the eldest sibling. The next eldest is " + ParentF->Kid[2]->Forename + " who was born " + std::to_string(std::abs(ParentF->Kid[2]->BirthYear - BirthYear)) + " years after me";
 				else
-					tempA = "My eldest sibling is " + ParentF->Kid[1]->Forename + " who was born " + std::to_string(ParentF->Kid[1]->Age) + " years old";
+					tempA = "My eldest sibling is " + ParentF->Kid[1]->Forename + " who was born in the year " + std::to_string(ParentF->Kid[1]->BirthYear);
 			}
 			else
 			{
@@ -1588,9 +1589,9 @@ void Villager::fillDialogue(int &dialogueOption)
 				}
 
 				if (sharedFnum > 1)
-					tempA = "Yes. We have " + std::to_string(sharedFnum) + " friends shared, including " + sharedFriend->Forename + " " + sharedFriend->Surname;
+					tempA = "Yes. We have " + std::to_string(sharedFnum) + " friends shared. One of them is " + sharedFriend->Forename + " " + sharedFriend->Surname;
 				else if (sharedFnum == 1)
-					tempA = "Yes. We have 1 shared friend, " + sharedFriend->Forename + " " + sharedFriend->Surname;
+					tempA = "Yes. We have 1 shared friend. It's " + sharedFriend->Forename + " " + sharedFriend->Surname;
 				else
 					tempA = "No. " + Friends[0]->Forename + " and I don't share any friends";
 			}
@@ -1725,15 +1726,10 @@ void Villager::OutputData()
 	
 	//Age, gender and Alive status
 	std::cout << "\n Age: " << Age << "		Gender: ";
-	if (Male)
-	{
-		std::cout << "Male";
-	}
-	else
-	{
-		std::cout << "Female";
-	}
 
+	std::cout << returnMale();
+	
+	//Live or not
 	std::cout << "		Status: ";
 	
 	if (Alive)
@@ -1744,6 +1740,9 @@ void Villager::OutputData()
 	{
 		std::cout << "Deceased";
 	} 
+
+	//How many gens have come before them
+	std::cout << "\n Generation: " << std::to_string(Generation);
 
 	//Parents
 	std::cout << "\n Father: ";

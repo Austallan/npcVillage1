@@ -450,6 +450,7 @@ void firstGeneration(int gen1, string homeTown)
 //can put this away as a function later and put him as Villager 0
 	villager[0].idNumber = 0;
 	villager[0].BirthYear = -99;
+	villager[0].Generation = 0;
 	villager[0].Age = 99;
 	villager[0].Alive = false;
 	villager[0].isPregnant = false;
@@ -509,6 +510,7 @@ void firstGeneration(int gen1, string homeTown)
 			villager[j].Male = true;
 		}
 		villager[j].BirthYear = -20;
+		villager[j].Generation = 1;
 		villager[j].Age = 20;
 		villager[j].Alive = true;
 		villager[j].isPregnant = false;
@@ -797,7 +799,7 @@ int main()
 	//outputFile.open(filename);
 
 	outputFile << "ID Number," << "Forename," << "Surname," << "Birth Year," << "Sex," << "Age," << "Mother ID," << "Father ID," << "No. of Kids," << "No. of Friends,"
-		<< "Partner ID," << "MB Type," << "Q1," << "A1," << "Q2," << "A2," << "Q3," << "A3," << "Q4," << "A4," << "Q5," << "A5," << "Job"<< std::endl;
+		<< "Partner ID," << "MB Type," << "Q1," << "A1," << "Q2," << "A2," << "Q3," << "A3," << "Q4," << "A4," << "Q5," << "A5," << "Job,"<< "Gen" << std::endl;
 
     //gimme that sweet output
     for (int i = 0; i < ActiveVillagers; i++)
@@ -817,7 +819,7 @@ int main()
 					outputFile << villager[i].dialogue[j][0] << "," << villager[i].dialogue[j][1] << ",";
 				}
 
-				outputFile << villager[i].returnRole() << std::endl; 
+				outputFile << villager[i].returnRole() << "," << std::to_string(villager[i].Generation) << std::endl;
 			}
 		}
 		else
@@ -833,7 +835,7 @@ int main()
 				outputFile << villager[i].dialogue[j][0] << "," << villager[i].dialogue[j][1] << ",";
 			}
 
-			outputFile << villager[i].returnRole() << std::endl;
+			outputFile << villager[i].returnRole() << "," << std::to_string(villager[i].Generation) << std::endl;
 		}
     }
 
