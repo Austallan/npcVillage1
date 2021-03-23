@@ -1213,10 +1213,6 @@ void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villa
 			tempStringQ = "When were you born?";
 			tempStringA = "I was born in the year " + std::to_string(currentYear);
 
-			std::cout << currentYear << std::endl;
-			std::cout << tempStringQ << std::endl;
-			std::cout << tempStringA << std::endl;
-
 			villagerArray[actiV].addDialogue(tempStringQ, tempStringA);
 			std::cout << villagerArray[actiV].dialogue[0][0] << std::endl << villagerArray[actiV].dialogue[0][1];
 		}
@@ -1611,19 +1607,6 @@ void Villager::fillDialogue(int &dialogueOption)
 			break;
 		}
 	}
-}
-
-int liveVillagers(Villager(&villagerArray)[3000], int population)
-{
-	int livingVillagers = 0;
-
-	for (int i = 0; i < population; i++)
-	{
-		if (villagerArray[i].Alive)
-			livingVillagers++;
-	}
-
-	return livingVillagers;
 }
 
 std::string Villager::returnMBType()

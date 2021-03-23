@@ -26,7 +26,6 @@ public:
 	void addDialogue(std::string Q, std::string A);
 	void editDialogue(std::string Qprefix, std::string Qsuffix, std::string Aprefix, std::string Asuffix);
 	void fillDialogue(int &dialogueOption);
-	int liveVillagers(Villager(&villagerArray)[3000], int population);
 	std::string returnMBType();
 	std::string returnRole();
 	std::string returnMale();

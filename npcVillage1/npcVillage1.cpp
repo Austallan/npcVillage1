@@ -23,6 +23,19 @@ int FemaleNameCount = 0;
 string SurnamesArray[2089];//2088
 int SurnamesCount = 0;
 
+int liveVillagers(Villager(&villagerArray)[3000], int population)
+{
+	int livingVillagers = 0;
+
+	for (int i = 0; i < population; i++)
+	{
+		if (villagerArray[i].Alive)
+			livingVillagers++;
+	}
+
+	return livingVillagers;
+}
+
 void feasabilityDemoPeople()
 {
     //Baby steps, let's create the base villager to act as "Parents" to the first generation
@@ -776,6 +789,7 @@ int main()
 		town2.populationChange();
 
 		std::cout << "\n << A YEAR HAS PASSED, IT IS NOW YEAR " << Year << " >> \n";
+		std::cout << " << There are currently " << std::to_string(liveVillagers(villager, ActiveVillagers)) << " living villagers >> \n\n";
 		Year++;
 	}
 
@@ -789,7 +803,7 @@ int main()
 
 	//filename
 	std::string filename = "..\\OutputVillages\\" + std::to_string(StartVillagers) + villageName + std::to_string(seed);
-	if (filterState)
+	if (aliveOnly)
 		filename = filename + "filtered.csv";
 	else
 		filename = filename + "unfiltered.csv";
