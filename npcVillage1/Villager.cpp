@@ -570,8 +570,6 @@ void Villager::SeverVillager(Villager &activeVillagerX)
 
 void Villager::NaturalCausesDeath()
 {
-	
-
 	if ((rand() % 100 + 70) < (Age + (deathRisk / 2)))
 	{
 		Alive = false;
@@ -1046,9 +1044,9 @@ void Villager::HaveChild(Villager(&villagerArray)[3000], Villager &mother, Villa
 {
 	bool birthSuccess = true;
 
-	if ((rand() % 10) < 0)
+	if ((rand() % 9) < 1)
 	{
-		if ((rand() % 5) < 0)
+		if ((rand() % 4) < 1)
 		{
 			mother.Job = DEAD;
 			mother.Alive = false;
