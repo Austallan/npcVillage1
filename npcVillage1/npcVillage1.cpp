@@ -856,6 +856,8 @@ int main()
 	outputFile.close();
 
 	std::cout << "\n Generated using seed: " << seed << endl;
+
+	system("pause");
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
